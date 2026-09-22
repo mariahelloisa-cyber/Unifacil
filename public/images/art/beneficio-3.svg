@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420" role="presentation">
+<defs>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#371447"/><stop offset="1" stop-color="#5D2577"/>
+</linearGradient>
+<radialGradient id="glow" cx="0.63" cy="0.54" r="0.75">
+<stop offset="0" stop-color="#A34BCC" stop-opacity="0.42"/><stop offset="1" stop-color="#A34BCC" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft"><feGaussianBlur stdDeviation="18.9"/></filter>
+</defs>
+<rect width="600" height="420" fill="url(#g)"/>
+<g filter="url(#soft)"><path d="M696.3,125.0 Q654.3,168.7 624.1,191.8 Q598.5,235.7 542.7,243.1 Q497.9,214.8 456.2,195.9 Q443.5,153.1 423.2,125.0 Q421.9,92.6 468.7,64.3 Q498.8,34.4 542.7,8.2 Q583.1,11.9 655.0,32.9 Q654.8,96.9 703.5,125.0 Z" fill="#5D2577" opacity="0.137"/><path d="M592.2,358.8 Q563.3,405.7 518.7,470.7 Q474.1,514.0 382.2,529.4 Q299.2,479.2 236.6,478.1 Q232.7,412.4 224.3,358.8 Q196.1,316.3 258.2,257.1 Q288.9,218.4 382.2,176.0 Q457.4,239.0 502.7,260.0 Q538.3,320.7 562.1,358.8 Z" fill="#A34BCC" opacity="0.223"/><path d="M192.6,32.6 Q181.3,85.7 154.4,141.4 Q68.6,167.3 21.7,179.8 Q-38.4,153.4 -121.7,150.2 Q-123.1,74.9 -180.8,32.6 Q-121.4,-12.2 -96.9,-64.8 Q-59.0,-110.5 21.7,-139.1 Q74.5,-103.6 146.2,-69.5 Q164.3,-34.4 213.0,32.6 Z" fill="#CCAFDA" opacity="0.255"/><path d="M388.1,406.3 Q309.4,470.4 250.4,561.5 Q201.8,562.0 61.3,585.3 Q-14.0,615.9 -149.0,578.8 Q-143.4,465.7 -168.5,406.3 Q-102.9,316.3 -101.6,272.8 Q4.5,235.8 61.3,166.7 Q147.9,226.7 248.1,253.2 Q292.3,307.5 360.4,406.3 Z" fill="#5D2577" opacity="0.235"/><path d="M678.7,220.1 Q659.0,282.2 624.1,321.3 Q563.4,324.3 500.8,325.5 Q468.5,310.4 417.1,288.8 Q378.1,264.9 380.0,220.1 Q393.7,172.7 393.6,132.2 Q442.4,113.7 500.8,70.8 Q553.2,91.2 628.7,115.2 Q591.4,204.3 631.2,220.1 Z" fill="#A34BCC" opacity="0.161"/><path d="M-60,105 C180,45 420,165 660,81" fill="none" stroke="#CCAFDA" stroke-width="2.5" opacity="0.230" stroke-linecap="round"/><path d="M-60,214 C180,159 420,270 660,192" fill="none" stroke="#CCAFDA" stroke-width="2.5" opacity="0.210" stroke-linecap="round"/><path d="M-60,323 C180,249 420,398 660,294" fill="none" stroke="#CCAFDA" stroke-width="2.5" opacity="0.248" stroke-linecap="round"/></g>
+<rect width="600" height="420" fill="url(#glow)"/>
+<path d="M198,100.8 L300,336 L402,100.8 L360,100.8 L300,260.4 L240,100.8 Z" fill="#FFFFFF" opacity="0.05"/>
+</svg>

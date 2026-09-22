@@ -1,0 +1,333 @@
+/* ==========================================================================
+   Home — Teste vocacional: cards editoriais da pilha (QuizIntro.tsx)
+
+   A estrutura de pin/stack vem de quiz-stack.css + useCardStack (GSAP).
+   Aqui: dimensões da seção da home e o design dos dois cards. Cores só a
+   partir dos tokens do globals.css (navy/sky da marca).
+   ========================================================================== */
+
+/* ---------------- Seção ---------------- */
+.quiz-stack-section.vq-home {
+  /* Altura do card: ~72vh entre 600 e 700px, nunca maior que a área útil. */
+  --card-h: min(700px, max(600px, 72vh), calc(100svh - var(--chrome) - 48px));
+  background: #fff;
+  /* Cards pinados centralizados: o último fica ~30% da tela parado. */
+  padding-bottom: calc((100svh - var(--chrome)) / 2 + 30svh);
+}
+.vq-home .quiz-stack-bg {
+  background: #fff;
+}
+/* Sem foto no fundo: o card 01 já entra logo no início da seção, em vez de
+   esperar atrás de uma foto (era 72svh quando a seção tinha a foto). */
+.vq-home .quiz-stack-list {
+  padding-top: clamp(24px, 6svh, 64px);
+}
+.vq-home .quiz-stack-card {
+  width: 92vw;
+  height: auto;
+  margin-inline: auto;
+}
+.vq-home .quiz-stack-card__inner {
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .vq-home .quiz-stack-card {
+    width: 88vw;
+  }
+}
+@media (min-width: 1024px) {
+  .vq-home .quiz-stack-card {
+    width: min(1080px, 82vw);
+  }
+}
+@media (min-width: 1440px) {
+  .vq-home .quiz-stack-card {
+    width: min(1080px, 75vw);
+  }
+}
+
+/* ---------------- Card (base) ---------------- */
+.vq-card {
+  --vq-ink: var(--color-navy-800);
+  --vq-pad: 28px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: var(--card-h);
+  padding: var(--vq-pad);
+  overflow: hidden;
+  border-radius: 26px;
+  color: var(--vq-ink);
+  box-shadow: 0 24px 60px rgb(31 15 43 / 0.18);
+}
+/* Fundos quase brancos, derivados do sky-100 da marca. O 01 é mais frio. */
+.vq-card--intro {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-sky-100) 62%, #fff) 0%,
+    color-mix(in srgb, var(--color-sky-100) 88%, #fff) 100%
+  );
+}
+.vq-card--cta {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-sky-100) 28%, #fff) 0%,
+    color-mix(in srgb, var(--color-sky-100) 52%, #fff) 100%
+  );
+}
+
+@media (min-width: 768px) {
+  .vq-card {
+    --vq-pad: clamp(36px, 5vw, 56px);
+    border-radius: 30px;
+  }
+}
+@media (min-width: 1024px) {
+  .vq-card {
+    /* Também limitado pela altura, para caber no card de ~600–700px. */
+    --vq-pad: clamp(36px, min(5vw, 7.5vh), 76px);
+    border-radius: 32px;
+  }
+}
+
+/* ---------------- Marca d'água (símbolo oficial) ---------------- */
+.vq-card__watermark {
+  position: absolute;
+  z-index: 0;
+  right: -38%;
+  bottom: -10%;
+  width: 110%;
+  aspect-ratio: 512 / 468;
+  overflow: hidden;
+  opacity: 0.06;
+  pointer-events: none;
+  user-select: none;
+}
+.vq-card__watermark img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (min-width: 768px) {
+  .vq-card__watermark {
+    right: -12%;
+    bottom: -20%;
+    width: 68%;
+    opacity: 0.075;
+  }
+}
+@media (min-width: 1024px) {
+  .vq-card__watermark {
+    right: -7%;
+    bottom: -22%;
+    width: 58%;
+  }
+}
+
+/* ---------------- Conteúdo ---------------- */
+/* Sem position: o logo do card 02 se posiciona pelo card, não pelo corpo. */
+.vq-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.vq-card__body > *,
+.vq-card__logo {
+  position: relative;
+  z-index: 2;
+}
+
+.vq-card__eyebrow {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: clamp(13px, min(1.2vw, 2vh), 20px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-navy-800);
+}
+.vq-card--cta .vq-card__eyebrow {
+  color: var(--color-navy-600);
+}
+
+.vq-card__title {
+  margin-top: clamp(18px, 4vh, 40px);
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: clamp(38px, 10.5vw, 54px);
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+  color: var(--color-navy-800);
+  text-wrap: balance;
+}
+
+.vq-card__text {
+  max-width: 600px;
+  margin-top: clamp(18px, 4.2vh, 42px);
+  font-size: clamp(18px, 4.9vw, 21px);
+  font-weight: 500;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--color-navy-800) 88%, transparent);
+}
+
+.vq-card__meta {
+  margin-top: clamp(14px, 3.2vh, 30px);
+  font-size: clamp(15px, min(1.3vw, 2.2vh), 20px);
+  font-weight: 600;
+  color: var(--color-navy-600);
+}
+
+@media (min-width: 768px) {
+  .vq-card__title {
+    font-size: clamp(50px, 6.6vw, 60px);
+  }
+  .vq-card--cta .vq-card__title {
+    font-size: clamp(46px, 6.2vw, 58px);
+  }
+  .vq-card__text {
+    font-size: 21px;
+  }
+}
+@media (min-width: 1024px) {
+  .vq-card__title {
+    font-size: clamp(56px, min(5.4vw, 8vh), 86px);
+    line-height: 0.94;
+  }
+  .vq-card--cta .vq-card__title {
+    font-size: clamp(48px, min(4.6vw, 6.9vh), 76px);
+  }
+  .vq-card__text {
+    font-size: clamp(20px, min(2vw, 3.2vh), 31px);
+  }
+  .vq-card--cta .vq-card__text {
+    max-width: 640px;
+    font-size: clamp(19px, min(1.7vw, 2.7vh), 28px);
+  }
+  /* Card 02: bloco de conteúdo centralizado na altura, alinhado à esquerda. */
+  .vq-card--cta .vq-card__body {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+/* ---------------- Logo oficial ---------------- */
+.vq-card__logo {
+  display: block;
+  width: 170px;
+  height: auto;
+}
+/* Card 01: assinatura no canto inferior esquerdo. */
+.vq-card--intro .vq-card__logo {
+  margin-top: auto;
+  padding-top: 20px;
+  box-sizing: content-box;
+}
+@media (min-width: 1024px) {
+  .vq-card--intro .vq-card__logo {
+    width: clamp(200px, min(20vw, 26vh), 290px);
+  }
+}
+
+/* Card 02: mobile pequeno entre label e título; tablet/desktop no topo direito. */
+.vq-card__logo--top {
+  width: 130px;
+  margin-top: 16px;
+  margin-bottom: -4px;
+}
+@media (min-width: 768px) {
+  .vq-card__logo--top {
+    position: absolute;
+    top: var(--vq-pad);
+    right: var(--vq-pad);
+    width: clamp(170px, 18vw, 230px);
+    margin: 0;
+  }
+}
+
+/* ---------------- Botão "Iniciar quiz" ---------------- */
+.vq-card__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  height: 72px;
+  margin-top: clamp(24px, 4.4vh, 44px);
+  border-radius: 999px;
+  background: var(--color-navy-800);
+  color: #fff;
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  box-shadow: 0 14px 30px rgb(96 46 115 / 0.22);
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease;
+}
+.vq-card__arrow {
+  width: 1.05em;
+  height: auto;
+  transform: translateX(0);
+  transition: transform 0.25s ease;
+}
+.vq-card__button:hover {
+  background: var(--color-navy-700);
+  transform: scale(1.02);
+}
+.vq-card__button:hover .vq-card__arrow {
+  transform: translateX(6px);
+}
+.vq-card__button:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+@media (min-width: 768px) {
+  .vq-card__button {
+    width: min(100%, 440px);
+    height: 84px;
+    font-size: 25px;
+  }
+}
+@media (min-width: 1024px) {
+  .vq-card__button {
+    width: clamp(380px, 38vw, 500px);
+    height: clamp(72px, 11vh, 100px);
+    font-size: clamp(22px, 3.3vh, 30px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vq-card__button,
+  .vq-card__arrow {
+    transition: background-color 0.25s ease;
+  }
+  .vq-card__button:hover,
+  .vq-card__button:hover .vq-card__arrow {
+    transform: none;
+  }
+}
+
+/* ---------------- Sem stack ----------------
+   Movimento reduzido, tela baixa, ou card maior que a tela (classe posta
+   pelo useCardStack): lista comum sobre fundo escuro, sem espaços de scroll. */
+@media (prefers-reduced-motion: reduce), (max-height: 519px) {
+  .quiz-stack-section.vq-home {
+    padding-block: clamp(56px, 8vw, 96px);
+  }
+  .vq-home .quiz-stack-list {
+    padding-top: 0;
+  }
+}
+.quiz-stack-section.vq-home.quiz-stack--static {
+  padding-block: clamp(56px, 8vw, 96px);
+}
+.vq-home.quiz-stack--static .quiz-stack-bg {
+  display: none;
+}
+.vq-home.quiz-stack--static .quiz-stack-list {
+  padding-top: 0;
+}
+.vq-home.quiz-stack--static .quiz-stack-gap {
+  height: 20px;
+}

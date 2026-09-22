@@ -1,0 +1,337 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1f0f2b;
+
+  /* Paleta oficial: roxo #602E73 e amarelo #E89E1B (os mesmos do site
+     universidadefacil.com.br, medidos no CSS dele).
+     Os nomes navy/sky vêm do site anterior; os valores já são da Universidade Fácil. */
+
+  /* Escuro dominante — roxo profundo derivado do roxo oficial */
+  --color-navy-950: #1f0f2b;
+  --color-navy-900: #2a153a;
+  --color-navy-850: #3a1d50;
+  --color-navy-800: #602e73; /* roxo oficial */
+  --color-navy-700: #6a4287;
+  --color-navy-600: #7e559c;
+
+  /* Lavandas — texto secundário sobre o roxo e fundos claros */
+  --color-sky-600: #7a4f98;
+  --color-sky-500: #9474ad;
+  --color-sky-400: #ad93c3;
+  --color-sky-300: #c9b6da;
+  --color-sky-200: #e2d6ec;
+  --color-sky-100: #f3eef8;
+
+  /* Accent — CTAs, links e faixas (roxo oficial) */
+  --color-accent: #602e73;
+  --color-accent-hover: #4d245c;
+  --color-accent-soft: #efe4f3;
+
+  /* Amarelo oficial — destaques, selos e botões sobre fundo escuro.
+     Texto em cima dele: navy-950 (branco não tem contraste). */
+  --color-gold: #e89e1b;
+  --color-gold-hover: #cf8b12;
+  --color-gold-soft: #fcecd0;
+  --color-gold-ink: #7a4f06;
+
+  /* Erros e ações destrutivas */
+  --color-rose: #e8557f;
+  --color-rose-dark: #cf3d67;
+
+  /* Section tints */
+  --color-tint: #f1ebf6;
+  --color-tint-deep: #e2d6ec;
+  --color-surface: #f4f2f6;
+
+  --color-ink: #1f0f2b;
+  --color-muted: #5e5068;
+
+  /* Geometry */
+  --container: 1280px;
+  --gutter: 20px;
+}
+
+@media (min-width: 640px) {
+  :root { --gutter: 40px; }
+}
+@media (min-width: 1024px) {
+  :root { --gutter: 80px; }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-navy-950: var(--color-navy-950);
+  --color-navy-900: var(--color-navy-900);
+  --color-navy-850: var(--color-navy-850);
+  --color-navy-800: var(--color-navy-800);
+  --color-navy-700: var(--color-navy-700);
+  --color-navy-600: var(--color-navy-600);
+
+  --color-sky-600: var(--color-sky-600);
+  --color-sky-500: var(--color-sky-500);
+  --color-sky-400: var(--color-sky-400);
+  --color-sky-300: var(--color-sky-300);
+  --color-sky-200: var(--color-sky-200);
+  --color-sky-100: var(--color-sky-100);
+
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-soft: var(--color-accent-soft);
+
+  --color-gold: var(--color-gold);
+  --color-gold-hover: var(--color-gold-hover);
+  --color-gold-soft: var(--color-gold-soft);
+  --color-gold-ink: var(--color-gold-ink);
+
+  --color-rose: var(--color-rose);
+  --color-rose-dark: var(--color-rose-dark);
+
+  --color-tint: var(--color-tint);
+  --color-tint-deep: var(--color-tint-deep);
+  --color-surface: var(--color-surface);
+
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* ---- Type scale (mirrors the reference's impact) ---- */
+.t-display {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(3.25rem, 8.35vw, 7.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+}
+.t-h2 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.25rem, 4.55vw, 4.0625rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+.t-h3 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 1.7vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+/* Título dos cards editoriais — grande o bastante para quebrar em 2/3 linhas. */
+.t-card-h {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.125rem, 2.72vw, 2.55rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.t-lead {
+  font-size: clamp(1rem, 1.15vw, 1.0625rem);
+  line-height: 1.6;
+  font-weight: 600;
+}
+.t-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Layout primitives ---- */
+.container-x {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section-y {
+  padding-block: clamp(3.5rem, 7vw, 6.5rem);
+}
+
+/* Horizontal scroll-snap carousel (4-up desktop, peek on mobile) */
+.rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 78%;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.rail::-webkit-scrollbar { display: none; }
+.rail > * { scroll-snap-align: start; }
+
+/* Trilho arrastável com o mouse (PhotoRail). */
+@media (hover: hover) and (pointer: fine) {
+  .rail-drag,
+  .rail-drag a { cursor: grab; }
+  .rail-drag.is-dragging,
+  .rail-drag.is-dragging a { cursor: grabbing; user-select: none; }
+}
+
+/* Slider de duas pontas do filtro de duração (CourseFinder): dois ranges
+   sobrepostos, só as bolinhas recebem clique. */
+.faixa-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 14px;
+  margin: 0;
+  background: transparent;
+  pointer-events: none;
+}
+.faixa-range::-webkit-slider-runnable-track { height: 14px; background: transparent; }
+.faixa-range::-moz-range-track { height: 14px; background: transparent; }
+.faixa-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--color-gold);
+  cursor: pointer;
+  pointer-events: auto;
+}
+.faixa-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--color-gold);
+  cursor: pointer;
+  pointer-events: auto;
+}
+.faixa-range:focus-visible { outline: none; }
+.faixa-range:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.faixa-range:focus-visible::-moz-range-thumb { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 22s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+@media (min-width: 640px) {
+  .rail { grid-auto-columns: 46%; gap: 16px; }
+}
+@media (min-width: 1024px) {
+  .rail { grid-auto-columns: calc((100% - 30px) / 4); gap: 10px; }
+}
+
+/* Edge-to-edge bleed out of the container */
+.bleed-l { margin-left: calc(var(--gutter) * -1); }
+@media (min-width: 1024px) {
+  .bleed-l { margin-left: calc((100vw - var(--container)) / -2 - var(--gutter)); }
+}
+
+/* ---- Scroll reveal ----
+   The resting state is visible; entering the viewport only *plays* an
+   animation. Nothing can be stranded invisible if the observer never fires
+   (fast scrolling, no JS, crawlers). */
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal.is-in {
+    animation: reveal-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+/* ---- Entrada em cascata (cabeçalho → cards) ----
+   Mesma regra do .reveal: o estado de repouso é visível; a classe .is-in só
+   *toca* a animação. Cada elemento define seu deslocamento (--rise) e seu
+   atraso (--delay) inline, o que produz o stagger sem JS por elemento. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 40px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise.is-in {
+    animation: rise-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--delay, 0ms);
+  }
+}
+
+/* ---- Slider estilo "simulador" (nota do ENEM, faixas de valor) ----
+   A parte percorrida é pintada pelo gradiente do próprio elemento: --fill
+   vem inline, do valor atual, e os dois pseudo-elementos só desenham o
+   thumb por cima. */
+.value-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--color-accent) 0%,
+    var(--color-accent) var(--fill, 0%),
+    #e6ddee var(--fill, 0%),
+    #e6ddee 100%
+  );
+  outline: none;
+  margin: 0;
+}
+.value-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(86, 50, 113, 0.45);
+}
+.value-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(86, 50, 113, 0.45);
+}
+/* No Firefox o track cobriria o gradiente do elemento — deixá-lo
+   transparente mantém o mesmo preenchimento dos demais navegadores. */
+.value-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: transparent;
+}

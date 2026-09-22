@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm ls *)",
+      "Bash(node -e \"require.resolve\\('playwright'\\)\")",
+      "Read(//c/Users/Micro/Downloads/hub/node_modules/.bin/**)",
+      "Read(//c/Users/Micro/Downloads/hub/node_modules/playwright-core/**)"
+    ]
+  }
+}

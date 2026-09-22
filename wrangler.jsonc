@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lafaculdades",
+  "main": ".open-next/worker.js",
+  "build": {
+    "command": "npx opennextjs-cloudflare build"
+  },
+  "compatibility_date": "2026-08-30",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "vars": {
+    "NEXT_PUBLIC_SUPABASE_URL": "https://nfklgwtncdaoembrmiar.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ma2xnd3RuY2Rhb2VtYnJtaWFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgxNjc2MjgsImV4cCI6MjEwMzc0MzYyOH0.jXIvp7TJL9mUHJwaxu6IEDFo_kOlIwsJosfNpn7WqeU"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

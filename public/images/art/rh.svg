@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="presentation">
+<defs>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#331242"/><stop offset="1" stop-color="#54216C"/>
+</linearGradient>
+<radialGradient id="glow" cx="0.68" cy="0.20" r="0.75">
+<stop offset="0" stop-color="#9F47C8" stop-opacity="0.42"/><stop offset="1" stop-color="#9F47C8" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft"><feGaussianBlur stdDeviation="27.0"/></filter>
+</defs>
+<rect width="800" height="600" fill="url(#g)"/>
+<g filter="url(#soft)"><path d="M750.2,192.0 Q707.4,256.6 706.9,296.1 Q651.3,301.8 579.9,350.1 Q527.5,327.1 437.4,308.8 Q459.2,246.1 414.6,192.0 Q411.7,156.1 461.3,94.7 Q531.3,71.0 579.9,27.0 Q628.0,69.2 711.9,83.7 Q708.7,132.7 719.3,192.0 Z" fill="#54216C" opacity="0.180"/><path d="M285.7,587.1 Q263.9,720.5 284.3,817.7 Q153.2,780.9 3.0,839.7 Q-63.9,797.1 -170.8,729.6 Q-282.4,662.8 -241.9,587.1 Q-325.7,430.7 -284.0,351.7 Q-87.2,337.2 3.0,311.9 Q83.3,376.9 229.8,401.1 Q275.2,530.7 338.2,587.1 Z" fill="#9F47C8" opacity="0.140"/><path d="M1189.9,182.2 Q1043.1,250.8 968.5,353.6 Q905.9,502.9 759.4,543.8 Q567.7,483.5 429.0,453.1 Q463.0,289.7 408.8,182.2 Q435.9,124.4 517.8,-15.9 Q572.3,-94.9 759.4,-58.3 Q956.3,-173.3 1102.4,-99.1 Q1107.7,108.4 1189.7,182.2 Z" fill="#C6A5D5" opacity="0.207"/><path d="M883.6,177.2 Q831.6,307.3 744.8,419.7 Q596.4,399.1 449.2,526.2 Q310.2,399.5 193.8,386.6 Q140.0,246.5 123.4,177.2 Q165.2,86.2 229.8,-2.6 Q345.5,-74.5 449.2,-67.6 Q520.8,-23.9 667.7,-2.0 Q717.2,88.2 823.2,177.2 Z" fill="#54216C" opacity="0.220"/><path d="M959.9,572.3 Q922.2,638.8 829.3,701.1 Q726.4,725.0 672.2,791.6 Q548.9,794.2 466.8,740.8 Q397.0,669.5 352.4,572.3 Q452.3,499.2 457.5,396.3 Q597.0,380.8 672.2,309.8 Q716.8,385.7 815.8,454.6 Q942.0,445.7 1007.2,572.3 Z" fill="#9F47C8" opacity="0.180"/><path d="M-80,150 C240,31 560,269 880.0000000000001,102" fill="none" stroke="#C6A5D5" stroke-width="3.6" opacity="0.173" stroke-linecap="round"/><path d="M-80,306 C240,194 560,418 880.0000000000001,261" fill="none" stroke="#C6A5D5" stroke-width="3.6" opacity="0.250" stroke-linecap="round"/><path d="M-80,462 C240,384 560,540 880.0000000000001,431" fill="none" stroke="#C6A5D5" stroke-width="3.6" opacity="0.165" stroke-linecap="round"/></g>
+<rect width="800" height="600" fill="url(#glow)"/>
+<path d="M264,144 L400,480 L536,144 L480,144 L400,372 L320,144 Z" fill="#FFFFFF" opacity="0.05"/>
+</svg>
