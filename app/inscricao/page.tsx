@@ -16,8 +16,8 @@ const HEROS: Record<OrigemMatricula, { title: string; description: string }> = {
     description: "Preencha seus dados e escolha o curso. Um consultor entra em contato para finalizar sua matrícula.",
   },
   vaga_gratuita: {
-    title: "Simule sua vaga gratuita",
-    description: "Preencha seus dados, a sua renda e o curso. Um consultor verifica sua elegibilidade para a vaga gratuita.",
+    title: "Simule sua bolsa de 100%",
+    description: "Preencha seus dados, a sua renda e o curso. Um consultor verifica sua elegibilidade para a bolsa de 100%.",
   },
   simulacao: {
     title: "Quero meu desconto",

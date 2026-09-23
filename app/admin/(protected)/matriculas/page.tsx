@@ -66,7 +66,7 @@ export default async function AdminMatriculasPage({
       <PageHeader
         icon="matriculas"
         title="Matrículas"
-        description="Pedidos enviados pelos formulários do site (matrícula, vaga gratuita e simulação de desconto). Mude o status conforme o atendimento avança."
+        description="Pedidos enviados pelos formulários do site (matrícula, bolsa de 100% e simulação de desconto). Mude o status conforme o atendimento avança."
       />
 
       {error && (
@@ -153,7 +153,7 @@ export default async function AdminMatriculasPage({
                   {m.renda && (
                     <div className="sm:col-span-2">
                       <dt className="inline text-muted">Renda familiar: </dt>
-                      <dd className="inline font-semibold">{FAIXAS_RENDA[m.renda]}</dd>
+                      <dd className="inline font-semibold">{FAIXAS_RENDA[m.renda] ?? m.renda}</dd>
                     </div>
                   )}
                 </dl>

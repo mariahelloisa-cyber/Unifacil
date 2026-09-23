@@ -144,7 +144,7 @@ export default async function EnemPage() {
             </AnimatedText>
 
             <AnimatedText as="p" delay={0.12} className="t-lead mx-auto mt-6 max-w-xl text-muted">
-              As bolsas gratuitas são destinadas a alunos de baixa renda e cada pedido é analisado pela
+              As bolsas de 100% são destinadas a alunos de baixa renda e cada pedido é analisado pela
               nossa equipe de matrículas — informe a renda da sua família e descubra se você pode
               estudar de graça.
             </AnimatedText>

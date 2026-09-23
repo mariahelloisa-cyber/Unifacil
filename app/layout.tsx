@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s — Universidade Fácil",
   },
   description:
-    "Programa social de bolsas de estudo: vagas gratuitas para alunos de baixa renda e descontos de até 80% em cursos profissionalizantes, EJA, técnicos, graduações e pós-graduações de instituições reconhecidas pelo MEC.",
+    "Programa social de bolsas de estudo: bolsas de 100% para alunos de baixa renda e descontos de até 80% em cursos profissionalizantes, EJA, técnicos, graduações e pós-graduações de instituições reconhecidas pelo MEC.",
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {

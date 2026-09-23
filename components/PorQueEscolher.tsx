@@ -12,10 +12,16 @@ const BENEFICIOS = [
  *  faixa roxa: o painel amarelo (mais estreito que a seção, com boa margem
  *  roxa dos dois lados), o texto dentro dele, e o personagem — absoluto em
  *  relação à SEÇÃO, não ao card, pra poder "sangrar" livremente por cima e
- *  por baixo do painel sem ser cortado pelo overflow do card. */
+ *  por baixo do painel sem ser cortado pelo overflow do card.
+ *
+ *  O painel NÃO é absoluto: a animação de entrada do <Reveal> aplica um
+ *  transform, o que faria daquela div o bloco de contenção de um filho
+ *  absoluto — e como ela tem altura zero, um top:50% ali resolveria pra 0 e
+ *  o card subiria pra fora da seção. Por isso a centralização vertical vem
+ *  do flex do wrapper, e as margens laterais em % dão o recuo do roxo. */
 export default function PorQueEscolher() {
   return (
-    <section className="relative overflow-hidden bg-navy-800 py-14 lg:flex lg:h-[clamp(460px,33vw,680px)] lg:items-center lg:py-0">
+    <section className="relative overflow-hidden bg-navy-800 py-14 lg:h-[clamp(460px,33vw,680px)] lg:py-0">
       {/* Profundidade sutil no roxo */}
       <div
         aria-hidden
@@ -72,12 +78,12 @@ export default function PorQueEscolher() {
         </p>
       </div>
 
-      {/* ---------- Card amarelo — mais estreito, centralizado ---------- */}
-      <div className="relative z-[1] mx-auto w-[calc(100%-40px)] sm:w-[calc(100%-80px)] lg:absolute lg:inset-0 lg:mx-0 lg:w-auto">
-        <Reveal>
+      {/* ---------- Card amarelo — mais estreito, centralizado no eixo Y ---------- */}
+      <div className="relative z-[1] mx-auto w-[calc(100%-40px)] sm:w-[calc(100%-80px)] lg:absolute lg:inset-0 lg:mx-0 lg:flex lg:w-auto lg:items-center">
+        <Reveal className="lg:w-full">
           <Link
             href="/institucional"
-            className="group relative mx-auto flex w-full max-w-[900px] flex-col overflow-hidden rounded-[36px] px-7 py-10 sm:px-10 lg:absolute lg:left-[16%] lg:right-[17%] lg:top-1/2 lg:mx-0 lg:h-[clamp(320px,20vw,425px)] lg:w-auto lg:max-w-none lg:-translate-y-1/2 lg:justify-center lg:rounded-[50px] lg:px-0 lg:py-0"
+            className="group relative mx-auto flex w-full max-w-[900px] flex-col overflow-hidden rounded-[36px] px-7 py-10 sm:px-10 lg:ml-[16%] lg:mr-[17%] lg:h-[clamp(320px,20vw,425px)] lg:w-auto lg:max-w-none lg:justify-center lg:rounded-[50px] lg:px-0 lg:py-0"
             style={{ backgroundImage: "linear-gradient(135deg, #F6A900 0%, #FFB310 55%, #F4A000 100%)" }}
           >
             {/* Arcos ton-sur-ton, bem maiores, entrando pelo topo/centro e
@@ -120,13 +126,13 @@ export default function PorQueEscolher() {
             inset-0 do wrapper acima), não ao painel — por isso não é cortado
             pelo overflow-hidden do card e pode ultrapassá-lo livremente. No
             mobile segue no fluxo normal, abaixo do painel. */}
-        <div className="relative z-[2] mt-6 flex justify-center sm:h-[380px] lg:absolute lg:bottom-0 lg:left-[58%] lg:top-[28px] lg:mt-0 lg:block lg:h-auto lg:w-[30%]">
+        <div className="relative z-[2] mt-6 flex justify-center sm:h-[380px] lg:absolute lg:inset-y-0 lg:left-[50%] lg:right-[16.5%] lg:mt-0 lg:block lg:h-auto lg:w-auto">
           <div className="relative h-[300px] w-[230px] sm:h-full sm:w-full lg:h-full lg:w-full">
             <Image
               src="/images/pessoacard-transparente.png"
               alt=""
               fill
-              sizes="(max-width: 1024px) 60vw, 32vw"
+              sizes="(max-width: 1024px) 60vw, 34vw"
               quality={95}
               className="pointer-events-none z-[2] object-contain object-bottom"
             />

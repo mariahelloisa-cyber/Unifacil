@@ -36,7 +36,7 @@ export default function Hero({ videoUrl }: { videoUrl?: string }) {
           para todos
         </h1>
         <p className="mt-6 max-w-2xl text-lg font-semibold leading-relaxed text-white/90">
-          Vagas gratuitas e descontos de até 80% em centenas de cursos, em instituições
+          Bolsas de 100% e descontos de até 80% em centenas de cursos, em instituições
           reconhecidas pelo MEC de todo o Brasil.
         </p>
 

@@ -22,12 +22,12 @@ const TEXTOS: Record<
     okTexto: "Um consultor vai entrar em contato pelo telefone ou e-mail informado para finalizar tudo com você.",
   },
   vaga_gratuita: {
-    rotulo: "Vaga gratuita",
-    titulo: "Simule sua vaga gratuita",
-    texto: "Preencha seus dados e a sua renda. Um consultor verifica sua elegibilidade para a vaga gratuita no curso escolhido.",
-    enviar: "Simular minha vaga gratuita",
+    rotulo: "Bolsa de 100%",
+    titulo: "Simule sua bolsa de 100%",
+    texto: "Preencha seus dados e a sua renda. Um consultor verifica sua elegibilidade para a bolsa de 100% no curso escolhido.",
+    enviar: "Simular minha bolsa de 100%",
     okTitulo: "Recebemos sua simulação!",
-    okTexto: "Um consultor vai entrar em contato pelo telefone ou e-mail informado para falar sobre a sua vaga gratuita.",
+    okTexto: "Um consultor vai entrar em contato pelo telefone ou e-mail informado para falar sobre a sua bolsa de 100%.",
   },
   simulacao: {
     rotulo: "Desconto",
@@ -297,6 +297,7 @@ function MatriculaForm({
                 id={`${id}-renda`}
                 name="renda"
                 required
+                aria-describedby={`${id}-renda-ajuda`}
                 value={valores.renda}
                 onChange={(e) => set("renda", e.target.value)}
                 className={`${inputClass(erros.renda)} appearance-none pr-11`}
@@ -312,6 +313,10 @@ function MatriculaForm({
               </select>
               <Seta />
             </div>
+            {/* O critério do programa; as faixas param no mesmo corte. */}
+            <p id={`${id}-renda-ajuda`} className="mt-1.5 text-[13px] leading-snug text-muted">
+              A bolsa de 100% é para famílias com renda de até 4 salários mínimos.
+            </p>
           </Campo>
         )}
 

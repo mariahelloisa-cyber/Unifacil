@@ -1,6 +1,6 @@
 const badges = [
   { title: "Até 80%", subtitle: "de desconto no valor do curso" },
-  { title: "Vagas gratuitas", subtitle: "para alunos de baixa renda" },
+  { title: "Bolsa de 100%", subtitle: "para alunos de baixa renda" },
   { title: "Centenas", subtitle: "de cursos em todo o Brasil" },
   { title: "MEC", subtitle: "Instituições parceiras reconhecidas" },
 ];

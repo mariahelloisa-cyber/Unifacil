@@ -17,17 +17,17 @@ const faqs = [
   {
     pergunta: "O que é a Universidade Fácil?",
     resposta:
-      "É um programa social de bolsas de estudo. Firmamos parcerias com universidades e escolas técnicas de todo o Brasil e adquirimos vagas antecipadamente em centenas de cursos — é isso que nos permite oferecer vagas gratuitas e descontos de até 80%.",
+      "É um programa social de bolsas de estudo. Firmamos parcerias com universidades e escolas técnicas de todo o Brasil e adquirimos vagas antecipadamente em centenas de cursos — é isso que nos permite oferecer bolsas de 100% e descontos de até 80%.",
   },
   {
-    pergunta: "Como funcionam as vagas gratuitas?",
+    pergunta: "Como funciona a bolsa de 100%?",
     resposta:
-      "Ao adquirir um grande número de vagas, o programa recebe uma porcentagem de vagas gratuitas. Elas são destinadas a alunos de baixa renda, para que mais pessoas possam estudar sem o peso financeiro.",
+      "Ao adquirir um grande número de vagas, o programa recebe uma porcentagem de vagas totalmente gratuitas: são as bolsas de 100%, destinadas a alunos de baixa renda, para que mais pessoas possam estudar sem o peso financeiro.",
   },
   {
     pergunta: "De quanto é o desconto?",
     resposta:
-      "As vagas adquiridas pelo programa são repassadas aos estudantes com descontos que podem chegar a 80% do valor tradicional do curso.",
+      "As vagas adquiridas pelo programa são repassadas aos estudantes com descontos que podem chegar a 80% do valor tradicional do curso. E parte das vagas é bolsa de 100%, sem custo nenhum: são para estudantes com renda familiar de até 4 salários mínimos, inscritos em programas sociais do governo ou em situação de vulnerabilidade socioeconômica.",
   },
   {
     pergunta: "Quais cursos eu posso fazer?",
@@ -116,7 +116,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* 2 — Vaga gratuita ou até 80% de desconto: dois cards que abrem o formulário */}
+      {/* 2 — Bolsa de 100% ou até 80% de desconto: dois cards que abrem o formulário */}
       <section className="relative isolate bg-surface pt-[clamp(2rem,3.9vw,3.5rem)] pb-[clamp(3rem,5.95vw,5.5rem)]">
         <Container>
           <IngressoCards
@@ -130,12 +130,12 @@ export default async function HomePage() {
         art="/images/sobre1.jpg"
         eyebrow="Por que a UniFácil?"
         title="Um programa para quem quer estudar e transformar a própria vida."
-        body="A Universidade Fácil adquire vagas antecipadamente em universidades e escolas técnicas de todo o Brasil. Assim, oferece vagas gratuitas para alunos de baixa renda e descontos de até 80% em cursos de instituições reconhecidas pelo MEC."
+        body="A Universidade Fácil adquire vagas antecipadamente em universidades e escolas técnicas de todo o Brasil. Assim, oferece bolsas de 100% para alunos de baixa renda e descontos de até 80% em cursos de instituições reconhecidas pelo MEC."
         linkHref="/institucional"
         linkLabel="Conheça o programa"
         badge={{ top: "Instituições reconhecidas pelo", big: "MEC" }}
         cards={[
-          { art: "/images/imagem1.jpg", label: "Vagas gratuitas" },
+          { art: "/images/imagem1.jpg", label: "Bolsa de 100%" },
           { art: "/images/imagem2.jpg", label: "Até 80% de desconto" },
           { art: "/images/imagem3.jpg", label: "Centenas de cursos" },
         ]}

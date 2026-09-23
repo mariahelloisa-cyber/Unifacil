@@ -15,19 +15,21 @@ export type StatusMatricula = keyof typeof STATUS_MATRICULA;
    origem, e a simulação de desconto pede também a renda. */
 export const ORIGEM_MATRICULA = {
   matricula: "Matrícula",
-  vaga_gratuita: "Vaga gratuita",
+  vaga_gratuita: "Bolsa de 100%",
   simulacao: "Simulação de desconto",
 } as const;
 
 export type OrigemMatricula = keyof typeof ORIGEM_MATRICULA;
 
-/* Renda familiar mensal em faixas de salário mínimo. */
+/* Renda familiar mensal em faixas de salário mínimo. O critério da bolsa de
+   100% é renda de até 4 salários mínimos, então as faixas param nesse corte —
+   nenhuma delas pode ficar em cima dele. */
 export const FAIXAS_RENDA = {
   ate_1: "Até 1 salário mínimo",
   "1_2": "De 1 a 2 salários mínimos",
   "2_3": "De 2 a 3 salários mínimos",
-  "3_5": "De 3 a 5 salários mínimos",
-  acima_5: "Acima de 5 salários mínimos",
+  "3_4": "De 3 a 4 salários mínimos",
+  acima_4: "Acima de 4 salários mínimos",
 } as const;
 
 export type FaixaRenda = keyof typeof FAIXAS_RENDA;

@@ -20,17 +20,17 @@ type Ingresso = {
   button: string;
 };
 
-/* As duas frentes do programa (briefing): vagas gratuitas para baixa renda e
+/* As duas frentes do programa (briefing): bolsas de 100% para baixa renda e
    vagas compradas repassadas com até 80% de desconto. */
 const ingresso: Ingresso[] = [
   {
     titulo: "Seu futuro não depende do seu bolso.",
     topicos: [
-      "Parte das vagas do programa é 100% gratuita,",
-      "Reservada para alunos de baixa renda,",
+      "Parte das vagas do programa é bolsa de 100%,",
+      "Para famílias com renda de até 4 salários mínimos,",
       "E um consultor acompanha você até a matrícula.",
     ],
-    cta: "Simular minha vaga gratuita",
+    cta: "Simular minha bolsa de 100%",
     modo: "vaga_gratuita",
     card: "bg-navy-950",
     titleColor: "text-white",

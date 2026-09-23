@@ -41,7 +41,7 @@ const passos = [
   {
     n: "4",
     t: "Fale com um consultor",
-    d: "Um consultor entra em contato, confere seus documentos, confirma o desconto da sua bolsa e garante sua vaga na instituição parceira.",
+    d: "Um consultor entra em contato, confere seus documentos, confirma o desconto da sua bolsa e garante sua vaga na instituição parceira. Quem concorre à bolsa de 100% passa antes pela avaliação do setor social.",
   },
 ];
 
@@ -113,12 +113,12 @@ const faqs = [
   {
     pergunta: "Quando eu começo a estudar?",
     resposta:
-      "Assim que os documentos são conferidos e a sua vaga é confirmada na instituição parceira, o consultor te passa as orientações para começar o curso.",
+      "Depois que o consultor confere seus documentos e a vaga é confirmada na instituição parceira, o acesso ao curso é liberado em até 48 horas.",
   },
   {
     pergunta: "Quanto eu vou pagar?",
     resposta:
-      "Depende do curso e da instituição parceira. As vagas do programa têm descontos de até 80% sobre o valor tradicional, e alunos de baixa renda podem ter acesso às vagas gratuitas. O consultor informa o valor do seu curso.",
+      "Depende do curso e da instituição parceira. As vagas do programa têm descontos de até 80% sobre o valor tradicional, e alunos de baixa renda podem ter acesso à bolsa de 100%. O consultor informa o valor do seu curso.",
   },
   {
     pergunta: "Posso me matricular em mais de um curso?",
@@ -142,7 +142,7 @@ export default async function MatriculaPage() {
       <PageHero
         eyebrow="Matrícula"
         title="Seu futuro começa no curso que você escolher."
-        description="Escolha um curso e garanta sua bolsa com até 80% de desconto. Sem prova: preencha seus dados e um consultor finaliza tudo com você."
+        description="Escolha um curso e garanta sua bolsa com até 80% de desconto. Sem prova, preencha seus dados e um consultor finaliza tudo com você."
         imageUrl="/images/matricula-hero.jpg"
       >
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">

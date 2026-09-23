@@ -16,13 +16,17 @@ import type { Course } from "@/lib/data/courses";
 
 const FORMAS_DE_PAGAMENTO = ["Pix", "Cartão de crédito", "Boleto"];
 
+/* O EJA não é reconhecido pelo MEC: quem certifica são escolas credenciadas
+   pela Secretaria Estadual de Educação (Resolução CNE/CEB nº 1, de 28/05/2021).
+   Os demais níveis seguem com o reconhecimento do MEC. */
+const ehEja = (course: Course) => /\beja\b/i.test(`${course.nivelNome} ${course.nome}`);
+
 /* Itens do quadro laranja: os destaques do curso no admin; sem eles, os
    itens-padrão do programa. */
 function itensDoCurso(course: Course) {
   if (course.destaques.length > 0) return course.destaques;
-  return ["Sem taxa de matrícula", "Certificado de conclusão", "Autorizado pelo MEC", course.modalidade].filter(
-    Boolean
-  );
+  const credenciamento = ehEja(course) ? "Credenciado pela SEED" : "Autorizado pelo MEC";
+  return ["Sem taxa de matrícula", "Certificado de conclusão", credenciamento, course.modalidade].filter(Boolean);
 }
 
 /* Carga horária da caixa roxa: o campo do admin (só o "1440 horas" do começo,
@@ -132,8 +136,8 @@ export default function CourseDetail({ course }: { course: Course }) {
               </ul>
 
               <p className="rounded-[20px] border-b-[10px] border-gold bg-[#290736] p-5 text-center text-[18px] text-white">
-                O valor do curso é fixo e se mantém assim, desde que o aluno não fique inadimplente ou não tranque a
-                matrícula.
+                A bolsa é mantida enquanto você acompanha o curso. Ela pode ser cancelada em caso de ausência por mais
+                de 30 dias consecutivos, reprovação em 3 disciplinas ou informações falsas no cadastro.
               </p>
             </div>
           </aside>

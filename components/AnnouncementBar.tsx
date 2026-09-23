@@ -21,7 +21,7 @@ export default function AnnouncementBar() {
             <circle cx="7" cy="7" r="1.6" fill="currentColor" />
           </svg>
           <span className="truncate">
-            Bolsas abertas<span className="hidden sm:inline">: vagas gratuitas e descontos de até 80%</span>!
+            Inscrições abertas<span className="hidden sm:inline">: bolsas de 100% e descontos de até 80%</span>!
           </span>
         </p>
         <div className="flex items-center gap-3">

@@ -426,9 +426,10 @@ export default function EditorialScroll() {
             <div className="ed-block__extra md:ml-[20%] md:mt-12 lg:ml-[60%] lg:-mr-[28%] lg:mt-20">
               <p className="mt-10 max-w-[46ch] text-[16px] font-semibold leading-relaxed text-white">
                 Adquirimos vagas antecipadamente, em grande quantidade, nas instituições parceiras.
-                Com isso, o programa recebe uma porcentagem de vagas gratuitas, destinadas a alunos
-                de baixa renda, e repassa as demais com descontos de até 80% do valor tradicional —
-                os valores mais acessíveis do Brasil.
+                Com isso, o programa recebe uma porcentagem de vagas totalmente gratuitas — as bolsas
+                de 100%, destinadas a alunos de baixa renda — e repassa as demais com descontos de
+                até 80% do valor tradicional. São os menores custos do Brasil, ou até mesmo nenhum
+                custo.
               </p>
               <p className="mt-6 border-l-4 border-accent pl-6 font-display text-[clamp(1.6rem,2.4vw,2.2rem)] font-bold leading-[1.15] text-white">
                 Educação de qualidade<br></br> ao alcance de todos

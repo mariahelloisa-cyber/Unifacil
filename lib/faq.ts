@@ -15,11 +15,11 @@ export const FAQ_CURSOS: FaqItem[] = [
   {
     pergunta: "Quando posso começar?",
     resposta:
-      "Assim que a matrícula é concluída e a sua vaga é confirmada na instituição parceira, você recebe as orientações para começar a estudar.",
+      "Com a documentação validada e a vaga confirmada na instituição parceira, o acesso ao curso é liberado em até 48 horas — aí é só começar a estudar.",
   },
   {
     pergunta: "Tem desconto?",
     resposta:
-      "Sim. Pelo programa, as vagas têm descontos de até 80% sobre o valor tradicional, e alunos de baixa renda podem ter acesso a vagas gratuitas.",
+      "Sim. Pelo programa, as vagas têm descontos de até 80% sobre o valor tradicional, e alunos de baixa renda podem ter acesso a bolsas de 100%.",
   },
 ];

@@ -86,8 +86,9 @@ create table if not exists public.matriculas (
   -- De qual botão veio: "Matricule-se", "Quero uma vaga gratuita" ou "Simular".
   origem             text not null default 'matricula'
                      check (origem in ('matricula', 'vaga_gratuita', 'simulacao')),
-  -- Faixa de renda familiar (pedida na simulação de vaga gratuita).
-  renda              text check (renda in ('ate_1', '1_2', '2_3', '3_5', 'acima_5')),
+  -- Faixa de renda familiar (pedida na simulação de bolsa de 100%). O corte do
+  -- critério é 4 salários mínimos, por isso as faixas terminam nele.
+  renda              text check (renda in ('ate_1', '1_2', '2_3', '3_4', 'acima_4')),
   status             text not null default 'novo'
                      check (status in ('novo', 'em_contato', 'matriculado', 'descartado')),
   enviado_gestor_em  timestamptz,
@@ -98,7 +99,17 @@ create table if not exists public.matriculas (
 alter table public.matriculas add column if not exists origem text not null default 'matricula'
   check (origem in ('matricula', 'vaga_gratuita', 'simulacao'));
 alter table public.matriculas add column if not exists renda text
-  check (renda in ('ate_1', '1_2', '2_3', '3_5', 'acima_5'));
+  check (renda in ('ate_1', '1_2', '2_3', '3_4', 'acima_4'));
+
+-- Bancos que já tinham as faixas antigas ('3_5' e 'acima_5'): o critério da
+-- bolsa é 4 salários mínimos, então a faixa "3 a 5" virou "3 a 4" e "acima de
+-- 5" virou "acima de 4". A restrição cai antes dos updates porque os valores
+-- novos não passam na antiga.
+alter table public.matriculas drop constraint if exists matriculas_renda_check;
+update public.matriculas set renda = '3_4' where renda = '3_5';
+update public.matriculas set renda = 'acima_4' where renda = 'acima_5';
+alter table public.matriculas add constraint matriculas_renda_check
+  check (renda in ('ate_1', '1_2', '2_3', '3_4', 'acima_4'));
 
 -- Mídias avulsas do site (vídeo da home, hero do blog, prints das redes).
 create table if not exists public.site_media (
