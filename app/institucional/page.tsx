@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import Image from "next/image";
 import Container from "@/components/Container";
 import BlobDepoimentos from "@/components/BlobDepoimentos";
 import CourseBannerCta from "@/components/CourseBannerCta";
-import EditorialScroll from "@/components/institucional/EditorialScroll";
+import Oportunidades from "@/components/institucional/Oportunidades";
+import Trajetoria from "@/components/institucional/Trajetoria";
+import IntroAnimation from "@/components/intro/IntroAnimation";
 import Reveal from "@/components/Reveal";
+import ScrollLink from "@/components/ScrollLink";
 import { SITE } from "@/lib/constants";
 import { getSiteMediaUrls, type SiteMediaKey } from "@/lib/data/siteMedia";
 
@@ -13,56 +15,6 @@ export const metadata: Metadata = {
   title: "Institucional",
   description: "Conheça a missão, a visão e como funciona o programa de bolsas Universidade Fácil.",
 };
-
-const iconProps = {
-  width: 30,
-  height: 30,
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 1.8,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-  "aria-hidden": true,
-};
-
-const destaques: { icon: ReactNode; texto: string }[] = [
-  {
-    icon: (
-      <svg {...iconProps}>
-        <path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3Z" />
-        <path d="m8.8 12 2.2 2.2 4.2-4.4" />
-      </svg>
-    ),
-    texto: "Instituições parceiras reconhecidas pelo MEC.",
-  },
-  {
-    icon: (
-      <svg {...iconProps}>
-        <path d="m12 3.5 2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9l-5.3 2.7 1-5.8-4.2-4.1 5.9-.9L12 3.5Z" />
-      </svg>
-    ),
-    texto: "Bolsa de 100% para alunos de baixa renda.",
-  },
-  {
-    icon: (
-      <svg {...iconProps}>
-        <circle cx="12" cy="9" r="5.5" />
-        <path d="m8.8 13.6-1.3 7 4.5-2.4 4.5 2.4-1.3-7" />
-      </svg>
-    ),
-    texto: "Descontos de até 80% no valor do curso.",
-  },
-  {
-    icon: (
-      <svg {...iconProps}>
-        <rect x="3.5" y="5" width="17" height="11" rx="1.5" />
-        <path d="M2 19h20" />
-      </svg>
-    ),
-    texto: "Centenas de cursos, do EJA à pós-graduação.",
-  },
-];
 
 /* Imagens enviadas pelo admin em /admin/midia/redes-sociais. */
 const redes: { chave: SiteMediaKey; nome: string; href: string }[] = [
@@ -78,9 +30,15 @@ export default async function InstitucionalPage() {
 
   return (
     <>
-      {/* Hero com a fachada ao fundo. O pb extra reserva o espaço de onde os
-          cards "saem" — eles sobem por cima da base da foto. */}
-      <section className="relative isolate overflow-hidden bg-navy-950">
+      {/* Intro fullscreen de abertura: roda a sequência de frames por cima de
+          tudo e sobe revelando o hero, que é renderizado normalmente aqui
+          atrás desde o primeiro paint. */}
+      <IntroAnimation />
+
+      {/* Hero centralizada sobre a fachada: título em amarelo oficial, duas
+          linhas de apoio e dois CTAs, com a forma orgânica escura ao fundo
+          dando profundidade (mesmo blob usado na seção "Acompanhe"). */}
+      <section className="relative isolate flex min-h-[560px] flex-col justify-center overflow-hidden bg-navy-950 lg:min-h-[660px]">
         <Image
           src="/images/fachada.png"
           alt=""
@@ -89,43 +47,53 @@ export default async function InstitucionalPage() {
           sizes="100vw"
           className="-z-10 object-cover object-[center_40%]"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950/90 via-navy-950/70 to-navy-950/40" />
-        <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-navy-950/80 to-transparent" />
+        {/* Véu parelho: o texto agora é centralizado, então não cabe mais o
+            gradiente lateral que servia ao layout alinhado à esquerda. */}
+        <div className="absolute inset-0 -z-10 bg-navy-950/70" />
+        <div className="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-navy-950/85 to-transparent" />
 
-        <Container className="pb-40 pt-16 lg:pb-48 lg:pt-24">
+        {/* Os dois deslocamentos são o que posiciona a forma: X negativo
+            empurra para a esquerda, Y positivo desce. */}
+        <BlobDepoimentos fill="#1f0f2bd9" manterProporcao deslocamentoX={-380} deslocamentoY={240} />
+
+        <Container className="relative z-10 py-16 lg:py-24">
           <Reveal>
-            <span className="t-label mb-5 inline-block rounded-full bg-white/12 px-4 py-1.5 uppercase text-sky-300">
-              Institucional
-            </span>
-            <h1 className="t-h2 max-w-4xl text-white">Transformando vidas com educação acessível para todos</h1>
-            <p className="t-lead mt-5 max-w-2xl text-sky-200">
-              Somos um programa social de bolsas de estudo que abre as portas de universidades e
-              escolas técnicas de todo o Brasil para quem tem vontade de estudar.
-            </p>
+            <div className="mx-auto max-w-5xl text-center">
+              
+
+              <h1 className="font-display text-[clamp(2.5rem,5.8vw,5rem)] font-extrabold leading-[0.95] tracking-[-0.04em] text-gold">
+                Transformando vidas <br></br>com educação acessível 
+              </h1>
+
+              {/* O asterisco do título faz a chamada destas duas linhas. */}
+              <p className="mx-auto mt-8 max-w-xl text-[15px] font-semibold leading-relaxed text-white lg:text-base">
+                *Programa social de bolsas de estudo
+                <br />
+                Universidades e escolas técnicas de todo o Brasil
+              </p>
+
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+                <ScrollLink
+                  alvo="nossa-historia"
+                  className="inline-flex items-center justify-center rounded-full bg-gold px-8 py-4 font-bold text-navy-950 transition-colors hover:bg-gold-hover"
+                >
+                  Conheça nossa história
+                </ScrollLink>
+              </div>
+            </div>
           </Reveal>
         </Container>
       </section>
 
-      {/* Cards sobrepostos à base do hero. */}
-      <div className="bg-white">
-        <Container className="relative z-10 -mt-28 lg:-mt-32">
-          <ul className="mx-auto grid max-w-[1000px] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-            {destaques.map((d, i) => (
-              <li key={d.texto}>
-                <Reveal delay={i * 70} className="h-full">
-                  <div className="flex h-full flex-col gap-5 bg-navy-950 p-6 text-white shadow-[0_18px_40px_rgba(31,15,43,0.25)] lg:min-h-[180px]">
-                    <span className="text-sky-200">{d.icon}</span>
-                    <p className="text-[16px] font-bold leading-snug">{d.texto}</p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </div>
+      {/* Destino do botão "Conheça nossa história". */}
+      <div id="nossa-historia" />
 
-      {/* Experiência editorial de scroll (pin + scrub com GSAP). */}
-      <EditorialScroll />
+      {/* Banner + carrossel: o card em destaque sobrepõe a borda do banner. */}
+      <Oportunidades />
+
+      {/* Trajetória: a linha acende cada passo ao entrar na tela. */}
+      <Trajetoria />
+
 
 
       {/* "Acompanhe" — prints das redes sociais, enviados pelo admin. */}

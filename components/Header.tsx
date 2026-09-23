@@ -9,7 +9,7 @@ const mainLinks = [{ label: "Por que a UniFácil?", href: "/institucional" }];
 
 const ingressarLinks = [
   { label: "Matrícula", href: "/matricula" },
-  { label: "Bolsas", href: "/enem" },
+  { label: "Bolsas", href: "/bolsas" },
 ];
 
 type NavLink = { label: string; href: string };

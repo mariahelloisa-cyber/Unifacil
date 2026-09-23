@@ -69,7 +69,7 @@ export default function PorQueEscolher() {
           </svg>
         </div>
 
-        <p className="absolute bottom-0 right-6 select-none text-[clamp(70px,9vw,140px)] font-black uppercase leading-[0.82] tracking-tight text-white/[0.07]">
+        <p className="absolute bottom-0 right-2 select-none text-[clamp(44px,5.5vw,90px)] font-black uppercase leading-[0.82] tracking-tight text-white/[0.07]">
           Vá
           <br />
           Mais
@@ -94,15 +94,38 @@ export default function PorQueEscolher() {
 
             <div className="relative lg:w-[49%] lg:pl-[70px]">
               <h2 className="uppercase text-navy-800" style={{ fontFamily: "var(--font-anton)" }}>
-                <span className="block text-[26px] leading-[0.95] tracking-wide sm:text-[32px] lg:whitespace-nowrap lg:text-[clamp(32px,2.5vw,54px)]">
+                <span className="relative z-10 block text-[26px] leading-[0.95] tracking-wide sm:text-[32px] lg:whitespace-nowrap lg:text-[clamp(32px,2.5vw,54px)]">
                   Por que escolher
                 </span>
-                <span className="mt-1 block text-[48px] leading-[0.9] tracking-[-0.01em] text-white sm:text-[64px] lg:whitespace-nowrap lg:text-[clamp(68px,5.5vw,112px)]">
+                <span className="relative mt-1 block text-[48px] leading-[0.9] tracking-[-0.01em] text-white sm:text-[64px] lg:whitespace-nowrap lg:text-[clamp(68px,5.5vw,112px)]">
                   A UniFácil
                 </span>
               </h2>
 
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-0 lg:mt-[50px] lg:flex-nowrap">
+              {/* CTA discreto: deixa explícito que o card inteiro é clicável.
+                  Some do espaço que antes era só respiro até os ícones, então
+                  a altura do card não muda. */}
+              <span className="relative z-10 mt-2 inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.08em] text-navy-800 lg:mt-3">
+                Conheça a UniFácil
+                <svg
+                  width="16"
+                  height="12"
+                  viewBox="0 0 20 14"
+                  fill="none"
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                  aria-hidden
+                >
+                  <path
+                    d="M1 7h17M12.5 1 18.5 7l-6 6"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+
+              <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-0 lg:mt-6 lg:flex-nowrap">
                 {BENEFICIOS.map((b, i) => (
                   <div
                     key={b.titulo}

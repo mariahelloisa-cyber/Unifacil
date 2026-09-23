@@ -125,6 +125,11 @@ const faqs = [
     resposta:
       "Pode. Fale dos dois cursos na mesma conversa: o consultor organiza as duas matrículas e explica como ficam as mensalidades.",
   },
+  {
+    pergunta: "Posso perder minha bolsa depois de matriculado?",
+    resposta:
+      "Sim. A bolsa pode ser cancelada em caso de ausência por mais de 30 dias consecutivos, reprovação em 3 disciplinas ou informações falsas no cadastro enviado na matrícula.",
+  },
 ];
 
 export default async function MatriculaPage() {
@@ -179,7 +184,7 @@ export default async function MatriculaPage() {
         </div>
       </PageHero>
 
-      {/* Faixa de selos — a mesma da página do ENEM. As versões "-corte" não
+      {/* Faixa de selos — a mesma da página de Bolsas. As versões "-corte" não
           têm a margem transparente embutida nos arquivos originais. */}
       <div className="bg-accent">
         <Container className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 py-4 sm:gap-x-20">
@@ -276,9 +281,7 @@ export default async function MatriculaPage() {
 
 
     {/* FAQ */}
-      {/* Mesmo azul da forma orgânica da seção acima, como no "Como funciona"
-          da página do ENEM. */}
-      <section className="section-y bg-[#d9c9e6]">
+      <section className="section-y bg-white">
         <Container>
           <Reveal>
             <h2 className="t-h2 text-navy-950">

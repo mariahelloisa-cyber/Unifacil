@@ -1,25 +1,35 @@
 import Image from "next/image";
-import enemFoto from "@/app/assets/enem.png";
 
-export default function EnemHero() {
+export default function BolsasHero() {
   return (
-    <section className="relative isolate flex min-h-[420px] flex-col justify-center overflow-hidden bg-black lg:min-h-[520px]">
-      <Image src={enemFoto} alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/95 via-black/75 to-black/35" />
+    <section className="relative isolate flex min-h-[420px] flex-col justify-center overflow-hidden bg-navy-950 lg:min-h-[520px]">
+      <Image src="/images/bolsas.png" alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
+      {/* Degradê em "U": escurece as laterais e a base (onde o texto e o
+          botão ficam), deixa o meio de cima da foto livre. Duas camadas —
+          uma horizontal (esquerda/direita) e uma vertical (de baixo pra
+          cima) — em vez de uma sombra cobrindo a foto inteira. */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(31,15,43,0.97) 0%, transparent 42%, transparent 66%, rgba(31,15,43,0.92) 100%), linear-gradient(to top, rgba(31,15,43,0.95) 0%, transparent 58%)",
+        }}
+      />
 
       <div className="container-x py-12 lg:py-16">
         <span className="t-label mb-5 inline-block rounded-full bg-white/12 px-4 py-1.5 uppercase text-sky-300">
-          Enem
+          Bolsas
         </span>
         <h1
           className="t-display max-w-[15ch] text-white"
           style={{ fontSize: "clamp(2.25rem, 5.4vw, 4.5rem)" }}
         >
-          Aqui sua nota do Enem vale desconto.
+          Aqui a sua bolsa de <span className="text-gold">100%</span> pode começar agora.
         </h1>
         <p className="mt-6 max-w-2xl text-lg font-semibold leading-relaxed text-white/90">
-          Use a nota de qualquer edição anterior do ENEM e garanta desconto na mensalidade do seu curso, sem
-          precisar fazer uma nova prova.
+          Famílias com renda de até 4 salários mínimos, inscritas em programas sociais do governo ou em
+          situação de vulnerabilidade socioeconômica podem estudar sem pagar nada.
         </p>
 
         <div className="mt-10">

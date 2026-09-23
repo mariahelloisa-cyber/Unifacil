@@ -288,7 +288,7 @@ body {
   }
 }
 
-/* ---- Slider estilo "simulador" (nota do ENEM, faixas de valor) ----
+/* ---- Slider estilo "simulador" (faixas de valor) ----
    A parte percorrida é pintada pelo gradiente do próprio elemento: --fill
    vem inline, do valor atual, e os dois pseudo-elementos só desenham o
    thumb por cima. */

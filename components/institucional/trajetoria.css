@@ -1,0 +1,192 @@
+/* ==========================================================================
+   Institucional — trajetória (Trajetoria.tsx)
+
+   A linha central preenche de cima para baixo conforme a rolagem, e cada
+   passo acende quando a ponta acesa chega no seu ponto.
+
+   Sem JS (ou com movimento reduzido) o CSS já mostra tudo aceso e a linha
+   cheia: a classe .is-animada é o que apaga os itens para a animação.
+   ========================================================================== */
+
+.traj {
+  --traj-ponto: 15px; /* diâmetro dos pontos da linha */
+  --traj-linha: 2px;
+  --traj-gap: clamp(20px, 4vw, 56px); /* distância do texto até a linha */
+  --traj-largura: 900px; /* largura máxima da trilha — menor = mais estreita */
+  position: relative;
+  background: var(--color-navy-950);
+  color: #fff;
+  padding-block: clamp(72px, 12vh, 140px);
+  overflow: clip;
+}
+
+/* ---- cabeçalho -------------------------------------------------------- */
+
+.traj__head {
+  max-width: var(--traj-largura);
+  margin-inline: auto;
+  margin-bottom: clamp(48px, 8vh, 88px);
+  text-align: center;
+}
+.traj__eyebrow {
+  margin-bottom: 14px;
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-sky-300);
+}
+.traj__titulo {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+/* Quebra fixa em duas linhas: "Sua trajetória com a" / "Universidade Fácil". */
+.traj__marca {
+  display: block;
+}
+
+/* ---- lista ------------------------------------------------------------ */
+
+/* O trilho existe só para a linha ter de onde se posicionar: a <ol> não pode
+   ter filho que não seja <li>. */
+.traj__trilho {
+  position: relative;
+  max-width: var(--traj-largura);
+  margin-inline: auto;
+}
+.traj__lista {
+  display: grid;
+  gap: clamp(44px, 7vh, 88px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Mobile: linha à esquerda, tudo alinhado à direita dela. */
+.traj__item {
+  display: grid;
+  grid-template-columns: var(--traj-ponto) minmax(0, 1fr);
+  align-items: center;
+  column-gap: var(--traj-gap);
+}
+.traj__texto {
+  grid-column: 2;
+  text-align: left;
+}
+.traj__ponto {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+}
+
+.traj__item-titulo {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-gold);
+}
+.traj__item-texto {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: rgb(255 255 255 / 0.8);
+}
+
+/* ---- ponto ------------------------------------------------------------ */
+
+.traj__ponto {
+  position: relative;
+  z-index: 1;
+  width: var(--traj-ponto);
+  height: var(--traj-ponto);
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 0 4px rgb(232 158 27 / 0.18), 0 0 18px 2px rgb(232 158 27 / 0.55);
+}
+
+/* ---- linha ------------------------------------------------------------ */
+
+.traj__linha {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* Mobile: centro da coluna dos pontos. */
+  left: calc(var(--traj-ponto) / 2);
+  width: var(--traj-linha);
+  transform: translateX(-50%);
+  background: rgb(255 255 255 / 0.14);
+}
+.traj__linha-fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 0;
+  background: linear-gradient(to bottom, rgb(232 158 27 / 0.65), var(--color-gold));
+  will-change: transform;
+}
+/* Brilho que viaja na ponta do preenchimento. */
+.traj__ponta {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 201 92 / 0.95), rgb(232 158 27 / 0) 68%);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Desktop/tablet: linha no centro, passos alternando os lados. */
+@media (min-width: 768px) {
+  .traj__item {
+    grid-template-columns: minmax(0, 1fr) var(--traj-ponto) minmax(0, 1fr);
+  }
+  .traj__ponto {
+    grid-column: 2;
+  }
+  .traj__item--esq .traj__texto {
+    grid-column: 1;
+    text-align: right;
+  }
+  .traj__item--dir .traj__texto {
+    grid-column: 3;
+    text-align: left;
+  }
+  .traj__linha {
+    left: 50%;
+  }
+}
+
+/* ==========================================================================
+   Estado animado — só existe com JS e sem prefers-reduced-motion.
+   ========================================================================== */
+
+.traj.is-animada .traj__linha-fill {
+  transform: scaleY(0);
+}
+.traj.is-animada .traj__item {
+  opacity: 0.2;
+  transition: opacity 0.55s ease;
+}
+.traj.is-animada .traj__item.is-on {
+  opacity: 1;
+}
+/* O ponto nasce apagado e ganha o brilho quando a ponta chega nele. */
+.traj.is-animada .traj__ponto {
+  background: rgb(255 255 255 / 0.28);
+  box-shadow: none;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+.traj.is-animada .traj__item.is-on .traj__ponto {
+  background: var(--color-gold);
+  box-shadow: 0 0 0 4px rgb(232 158 27 / 0.18), 0 0 18px 2px rgb(232 158 27 / 0.55);
+}
