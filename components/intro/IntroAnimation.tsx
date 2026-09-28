@@ -13,9 +13,9 @@ import "./intro.css";
 
    >>> É SÓ AQUI QUE SE MEXE: a SEQUENCIA abaixo e as constantes de tempo.
 
-   As imagens ficam em /public/frames/ (frame-01.jpg … frame-08.jpg). Para
+   As imagens ficam em /public/frames/ (frame-01.webp … frame-08.webp). Para
    trocar, basta sobrescrever os arquivos com o mesmo nome — ou editar os
-   caminhos aqui. Recomendado: JPG de ~1600px de largura e 120–250 KB cada,
+   caminhos aqui. Recomendado: WebP de ~1600px de largura e até ~150 KB cada,
    já que todas são baixadas antes da sequência começar.
    ========================================================================== */
 
@@ -33,20 +33,20 @@ type Frame = {
 };
 
 const SEQUENCIA: Frame[] = [
-  { image: "/frames/frame-01.jpg", topo: "PROGRAMA DE\nBOLSAS©2026", base: "TRANSFORMANDO\nVIDAS.", duration: 90 },
-  { image: "/frames/frame-02.jpg", topo: "PROGRAMA DE\nBOLSAS©2026", base: "TRANSFORMANDO\nVIDAS.", duration: 70 },
-  { image: "/frames/frame-03.jpg", topo: "PROGRAMA DE\nBOLSAS©2026", base: "TRANSFORMANDO\nVIDAS.", duration: 70 },
-  { image: "/frames/frame-02.jpg", topo: "PROGRAMA DE\nBOLSAS©2026", base: "TRANSFORMANDO\nVIDAS.", duration: 60 },
+  { image: "/frames/frame-01.webp", topo: "PROGRAMA DE\nBOLSAS©2026", base: "TRANSFORMANDO\nVIDAS.", duration: 90 },
+  { image: "/frames/frame-02.webp", topo: "PROGRAMA DE\nBOLSAS©2026", base: "TRANSFORMANDO\nVIDAS.", duration: 70 },
+  { image: "/frames/frame-03.webp", topo: "PROGRAMA DE\nBOLSAS©2026", base: "TRANSFORMANDO\nVIDAS.", duration: 70 },
+  { image: "/frames/frame-02.webp", topo: "PROGRAMA DE\nBOLSAS©2026", base: "TRANSFORMANDO\nVIDAS.", duration: 60 },
 
-  { image: "/frames/frame-04.jpg", topo: "BOLSAS DE\nATÉ 100%", base: "EDUCAÇÃO\nPARA TODOS.", duration: 80 },
-  { image: "/frames/frame-05.jpg", topo: "BOLSAS DE\nATÉ 100%", base: "EDUCAÇÃO\nPARA TODOS.", duration: 70 },
-  { image: "/frames/frame-06.jpg", topo: "BOLSAS DE\nATÉ 100%", base: "EDUCAÇÃO\nPARA TODOS.", duration: 70 },
-  { image: "/frames/frame-05.jpg", topo: "BOLSAS DE\nATÉ 100%", base: "EDUCAÇÃO\nPARA TODOS.", duration: 60 },
+  { image: "/frames/frame-04.webp", topo: "BOLSAS DE\nATÉ 100%", base: "EDUCAÇÃO\nPARA TODOS.", duration: 80 },
+  { image: "/frames/frame-05.webp", topo: "BOLSAS DE\nATÉ 100%", base: "EDUCAÇÃO\nPARA TODOS.", duration: 70 },
+  { image: "/frames/frame-06.webp", topo: "BOLSAS DE\nATÉ 100%", base: "EDUCAÇÃO\nPARA TODOS.", duration: 70 },
+  { image: "/frames/frame-05.webp", topo: "BOLSAS DE\nATÉ 100%", base: "EDUCAÇÃO\nPARA TODOS.", duration: 60 },
 
-  { image: "/frames/frame-07.jpg", topo: "UNIVERSIDADE\nFÁCIL©2026", base: "ESTUDAR FICOU\nMAIS FÁCIL.", duration: 80 },
-  { image: "/frames/frame-08.jpg", topo: "UNIVERSIDADE\nFÁCIL©2026", base: "ESTUDAR FICOU\nMAIS FÁCIL.", duration: 70 },
-  { image: "/frames/frame-07.jpg", topo: "UNIVERSIDADE\nFÁCIL©2026", base: "ESTUDAR FICOU\nMAIS FÁCIL.", duration: 70 },
-  { image: "/frames/frame-08.jpg", topo: "UNIVERSIDADE\nFÁCIL©2026", base: "ESTUDAR FICOU\nMAIS FÁCIL.", duration: 260 },
+  { image: "/frames/frame-07.webp", topo: "UNIVERSIDADE\nFÁCIL©2026", base: "ESTUDAR FICOU\nMAIS FÁCIL.", duration: 80 },
+  { image: "/frames/frame-08.webp", topo: "UNIVERSIDADE\nFÁCIL©2026", base: "ESTUDAR FICOU\nMAIS FÁCIL.", duration: 70 },
+  { image: "/frames/frame-07.webp", topo: "UNIVERSIDADE\nFÁCIL©2026", base: "ESTUDAR FICOU\nMAIS FÁCIL.", duration: 70 },
+  { image: "/frames/frame-08.webp", topo: "UNIVERSIDADE\nFÁCIL©2026", base: "ESTUDAR FICOU\nMAIS FÁCIL.", duration: 260 },
 ];
 
 /** Etiquetas pequenas do meio da tela. String vazia esconde a etiqueta. */
@@ -274,7 +274,7 @@ export default function IntroAnimation() {
             decoding="async"
             /* A sequência só começa quando TODAS decodificam, então todas são
                prioridade alta — senão perdem a banda para o preload do hero
-               (fachada.png) que está renderizado aqui atrás. */
+               (fachada.webp) que está renderizado aqui atrás. */
             fetchPriority="high"
             className={`intro__frame${i === 0 ? " is-ativa" : ""}`}
             data-frame={i}

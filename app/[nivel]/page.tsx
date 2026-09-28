@@ -42,9 +42,7 @@ export default async function NivelPage({ params }: { params: Promise<{ nivel: s
         className="scroll-mt-[122px] bg-white pb-14 pt-8 sm:pb-16 sm:pt-10 lg:scroll-mt-[130px] lg:pb-20 lg:pt-12 xl:pb-24"
       >
         <Container>
-          {/* O mesmo catálogo com filtros da /matricula: todos os cursos, abrindo
-              com esta categoria marcada em "Formação" (dá para trocar ou somar outras). */}
-          <CourseFinder courses={cursos} formacaoInicial={nivelInfo.nome} />
+                    <CourseFinder courses={cursos} formacaoInicial={nivelInfo.nome} />
         </Container>
       </section>
     </>

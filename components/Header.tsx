@@ -167,7 +167,7 @@ export default function Header({ courseNiveis }: { courseNiveis: CourseNivel[] }
         <div className="container-x flex h-[64px] items-center justify-between gap-4 lg:h-[72px]">
           <Link href="/" className="shrink-0" aria-label="Universidade Fácil — página inicial">
             <Image
-              src="/images/logo-horizontal.png"
+              src="/images/logo-horizontal.webp"
               alt="Universidade Fácil"
               width={1200}
               height={416}

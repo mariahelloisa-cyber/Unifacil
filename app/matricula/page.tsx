@@ -148,7 +148,7 @@ export default async function MatriculaPage() {
         eyebrow="Matrícula"
         title="Seu futuro começa no curso que você escolher."
         description="Escolha um curso e garanta sua bolsa com até 80% de desconto. Sem prova, preencha seus dados e um consultor finaliza tudo com você."
-        imageUrl="/images/matricula-hero.jpg"
+        imageUrl="/images/matricula-hero.webp"
       >
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
@@ -189,7 +189,7 @@ export default async function MatriculaPage() {
       <div className="bg-accent">
         <Container className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 py-4 sm:gap-x-20">
           <Image
-            src="/images/logobranca-corte.png"
+            src="/images/logobranca-corte.webp"
             alt="Universidade Fácil"
             width={1200}
             height={416}
@@ -237,7 +237,7 @@ export default async function MatriculaPage() {
           matricular direto, sem passar pela página do curso. */}
       <section className="relative overflow-hidden bg-navy-950">
         <Image
-          src="/images/fachada.png"
+          src="/images/fachada.webp"
           alt=""
           aria-hidden
           fill

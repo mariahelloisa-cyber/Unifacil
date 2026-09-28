@@ -27,8 +27,12 @@ export default function ScrollLink({
     if (!destino) return; // sem o alvo, o href resolve sozinho
     e.preventDefault();
 
-    const chrome = document.querySelector<HTMLElement>("[data-site-chrome]")?.offsetHeight ?? 0;
     const topo = destino.getBoundingClientRect().top;
+    /* Em página com header que some ao descer (data-auto-esconde), rolar para
+       baixo o esconde — descontar a altura dele deixaria um vão no topo. */
+    const elChrome = document.querySelector<HTMLElement>("[data-site-chrome]");
+    const chrome =
+      elChrome && !(elChrome.hasAttribute("data-auto-esconde") && topo > 0) ? elChrome.offsetHeight : 0;
     const suave = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     window.scrollTo({

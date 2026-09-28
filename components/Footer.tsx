@@ -28,7 +28,7 @@ export default function Footer() {
         <div className="container-x flex flex-col gap-8 py-10 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:gap-10">
             <Image
-              src="/images/logobranca-corte.png"
+              src="/images/logobranca-corte.webp"
               alt="Universidade Fácil"
               width={1200}
               height={416}

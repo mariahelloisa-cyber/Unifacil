@@ -1,16 +1,5 @@
 import type { TraitWeights } from "./types.ts";
 
-/* Perfil interno de afinidade de cada curso, chaveado pelo slug REAL do curso
-   (tabela `courses` do Supabase). Nada de nome, imagem ou URL aqui: esses
-   dados continuam vindo da fonte central (lib/data/courses.ts).
-
-   Escala 1–5 por dimensão; dimensão ausente = 0. Só a proporção entre as
-   dimensões importa (a comparação é por cosseno), então um curso com muitos
-   5 não leva vantagem sobre um com poucos.
-
-   Curso cadastrado no admin sem entrada aqui NÃO é recomendado (e gera um
-   aviso no log do servidor) — melhor ficar de fora do que ser recomendado com
-   um perfil inventado. */
 export const COURSE_AFFINITY_PROFILES: Record<string, TraitWeights> = {
   /* ---------------- Graduação ---------------- */
   "gestao-em-ti": { technology: 5, management: 4, strategy: 4, leadership: 3, analysis: 2, organization: 2 },

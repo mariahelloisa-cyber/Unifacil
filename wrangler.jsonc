@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "lafaculdades",
+  "name": "universidadefacil",
   "main": ".open-next/worker.js",
   "build": {
     "command": "npx opennextjs-cloudflare build"
@@ -11,10 +11,15 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
-  "vars": {
-    "NEXT_PUBLIC_SUPABASE_URL": "https://nfklgwtncdaoembrmiar.supabase.co",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ma2xnd3RuY2Rhb2VtYnJtaWFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgxNjc2MjgsImV4cCI6MjEwMzc0MzYyOH0.jXIvp7TJL9mUHJwaxu6IEDFo_kOlIwsJosfNpn7WqeU"
+  // Cloudflare Images: o next/image passa a redimensionar e converter as
+  // imagens (sem isto o OpenNext devolve o arquivo original). Cota grátis de
+  // 5.000 transformações únicas por mês.
+  "images": {
+    "binding": "IMAGES"
   },
+  // As variáveis do Supabase (NEXT_PUBLIC_*) vêm do .env e são embutidas no
+  // build. Não declarar aqui: "vars" do worker têm prioridade sobre o .env em
+  // runtime e já apontaram para o projeto antigo da LA Faculdade.
   "observability": {
     "enabled": true
   }

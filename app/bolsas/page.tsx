@@ -75,7 +75,7 @@ export default async function BolsasPage() {
       <div className="bg-accent">
         <Container className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 py-4 sm:gap-x-20">
           <Image
-            src="/images/logobranca-corte.png"
+            src="/images/logobranca-corte.webp"
             alt="Universidade Fácil"
             width={1200}
             height={416}

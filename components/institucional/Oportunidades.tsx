@@ -4,57 +4,60 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import "./oportunidades.css";
+import diferenciais from "@/app/assets/diferenciais.webp";
 
-/* >>> TEXTOS PROVISÓRIOS (lorem ipsum) — é só trocar por aqui.
-   A quantidade de cards é livre: os controles e os pontinhos se ajustam. */
+/* >>> Textos da seção — é só trocar por aqui. Os cards são os diferenciais do
+   briefing (os dois PDFs), cada um apontando para a página que continua o
+   assunto. A quantidade de cards é livre: os controles e os pontinhos se
+   ajustam. */
 
 const CABECALHO = {
-  titulo: "Lorem ipsum dolor sit amet",
-  subtitulo: "Consectetur adipiscing elit sed do eiusmod tempor",
+  titulo: "Nossos diferenciais",
+  subtitulo: "O que faz da Universidade Fácil um dos caminhos mais acessíveis para estudar",
 };
 
 const BANNER = {
-  imagem: "/images/alunos.jpg",
-  linhaFina: "Lorem ipsum",
-  chamada: "Dolor sit\namet elit",
+  imagem: diferenciais,
+  linhaFina: "Universidade Fácil",
+  chamada: "Educação\nacessível",
 };
 
 const CARDS: { titulo: string; texto: string; cta: string; href: string }[] = [
   {
-    titulo: "Lorem ipsum dolor",
-    texto: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.",
-    cta: "Conheça agora",
+    titulo: "Acessibilidade financeira",
+    texto: "Uma das opções educacionais mais acessíveis do país, com bolsas gratuitas e descontos de até 80%.",
+    cta: "Conheça as bolsas",
     href: "/bolsas",
   },
   {
-    titulo: "Quae ab illo inventore",
-    texto: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
-    cta: "Conheça agora",
-    href: "/matricula",
+    titulo: "Vagas gratuitas",
+    texto: "Parte das vagas é destinada gratuitamente a alunos de baixa renda, que estudam sem pagar mensalidade.",
+    cta: "Simular minha bolsa",
+    href: "/bolsas",
   },
   {
-    titulo: "Neque porro quisquam",
-    texto: "Qui dolorem ipsum quia dolor sit amet consectetur adipisci velit sed quia.",
-    cta: "Conheça agora",
+    titulo: "Diversidade de cursos",
+    texto: "Centenas de opções — profissionalizantes, técnicos, EJA, graduações e pós — para todos os perfis.",
+    cta: "Escolher meu curso",
     href: "/inscricao",
   },
   {
-    titulo: "Ut enim ad minima",
-    texto: "Veniam quis nostrum exercitationem ullam corporis suscipit laboriosam nisi.",
-    cta: "Conheça agora",
-    href: "/teste-vocacional",
+    titulo: "Parcerias com instituições",
+    texto: "Acordos com universidades e escolas técnicas de todo o Brasil, em cursos reconhecidos pelo MEC.",
+    cta: "Como me matricular",
+    href: "/matricula",
   },
   {
-    titulo: "Quis autem vel eum",
-    texto: "Iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae.",
-    cta: "Conheça agora",
+    titulo: "Impacto social real",
+    texto: "Educação de qualidade para quem mais precisa, ajudando a construir uma sociedade mais justa.",
+    cta: "Falar com a gente",
     href: "/contato",
   },
   {
-    titulo: "At vero eos et accusamus",
-    texto: "Iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.",
-    cta: "Conheça agora",
-    href: "/bolsas",
+    titulo: "Oportunidade de renda",
+    texto: "Seja um representante autônomo, com ganhos proporcionais ao desempenho, suporte e treinamentos.",
+    cta: "Quero ser representante",
+    href: "/contato",
   },
 ];
 
@@ -114,7 +117,14 @@ export default function Oportunidades() {
     return () => window.removeEventListener("resize", aplicar);
   }, [indice]);
 
-  const ir = (delta: number) => setIndice((i) => Math.min(Math.max(i + delta, 0), maximo));
+  /* Rolagem infinita: passou do último volta ao primeiro, e vice-versa. */
+  const ir = (delta: number) =>
+    setIndice((i) => {
+      const prox = i + delta;
+      if (prox > maximo) return 0;
+      if (prox < 0) return maximo;
+      return prox;
+    });
 
   /* Enquanto não mediu, todos contam como visíveis: nada fica escondido de
      leitor de tela nem fora da ordem de tabulação sem necessidade. */
@@ -128,6 +138,7 @@ export default function Oportunidades() {
           <div className="op__banner">
             <Image
               src={BANNER.imagem}
+              placeholder="blur"
               alt=""
               fill
               sizes="(min-width: 1200px) 432px, (min-width: 768px) 32vw, 100vw"
@@ -187,7 +198,6 @@ export default function Oportunidades() {
                 type="button"
                 className="op__seta"
                 aria-label="Item anterior"
-                disabled={indice === 0}
                 onClick={() => ir(-1)}
               >
                 <Seta sentido="anterior" />
@@ -196,7 +206,6 @@ export default function Oportunidades() {
                 type="button"
                 className="op__seta"
                 aria-label="Próximo item"
-                disabled={indice >= maximo}
                 onClick={() => ir(1)}
               >
                 <Seta sentido="proximo" />

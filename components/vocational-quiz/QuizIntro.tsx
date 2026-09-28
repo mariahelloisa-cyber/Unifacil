@@ -10,8 +10,8 @@ import "./quiz-stack.css";
 import "./vocational-cards.css";
 
 /* Assets oficiais da marca (public/images). */
-const LOGO_HORIZONTAL = { src: "/images/logo-horizontal.png", width: 1200, height: 416 };
-const LOGO_MARK = { src: "/images/logo-mark.png", width: 512, height: 468 };
+const LOGO_HORIZONTAL = { src: "/images/logo-horizontal.webp", width: 1200, height: 416 };
+const LOGO_MARK = { src: "/images/logo-mark.webp", width: 512, height: 468 };
 
 /** Símbolo oficial enorme ao fundo. */
 function Watermark() {

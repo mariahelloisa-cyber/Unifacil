@@ -6,7 +6,7 @@ import BlobDepoimentos from "./BlobDepoimentos";
 /* Recorte da aluna (PNG com fundo transparente): ela fica alinhada pela base
    do banner e sobra para fora, por cima da borda de cima. Import estático — o
    arquivo vive em app/assets, fora de public. */
-import persona from "@/app/assets/persona.png";
+import persona from "@/app/assets/persona.webp";
 /* Quanto a aluna sobe para fora do banner, em px. O padding da seção reserva
    exatamente esse espaço, então nada é cortado nem empurra o conteúdo. */
 const SOBRA = 92;
@@ -56,7 +56,7 @@ export default function CourseBannerCta({ href }: { href: string }) {
 
             {/* Versão branca oficial da marca. */}
             <Image
-              src="/images/logobranca-corte.png"
+              src="/images/logobranca-corte.webp"
               alt="Universidade Fácil"
               width={1200}
               height={416}

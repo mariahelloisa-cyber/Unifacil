@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Course } from "@/lib/data/courses";
 import { duracaoEmMeses } from "@/lib/duracao";
 import CourseCard from "./CourseCard";
@@ -44,6 +44,15 @@ export default function CourseFinder({
   const [areasMarcadas, setAreas] = useState<string[]>([]);
   const [faixa, setFaixa] = useState<[number, number] | null>(null);
   const [filtrosAbertos, setFiltrosAbertos] = useState(false);
+
+  /* ?formacao=todas (botão "Encontre seu curso" da home) abre com todas as
+     formações marcadas. Lido depois de montar para a página continuar estática. */
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("formacao") === "todas") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- parâmetro da URL só existe no cliente
+      setFormacoes(formacoes);
+    }
+  }, [formacoes]);
 
   /* A faixa escolhida vale só dentro dos limites atuais (cursos podem mudar). */
   const faixaAtual = useMemo<[number, number] | null>(

@@ -3,7 +3,7 @@ import Container from "./Container";
 import BlobDepoimentos from "./BlobDepoimentos";
 /* Composição da esquerda (aluna + janela de atendimento). Recorte feito a
    partir de contato2.png, que veio em alta com o fundo azul embutido. */
-import contato from "@/app/assets/contato-recorte.png";
+import contato from "@/app/assets/contato-recorte.webp";
 
 /** Hero da página de contato: azul, com a aluna à esquerda e a chamada à
  *  direita. Sem botão — o formulário e os canais vêm logo abaixo. */

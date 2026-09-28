@@ -1,7 +1,5 @@
 import type { Trait } from "./types.ts";
 
-/* Textos das dimensões para montar a explicação do resultado. Tudo
-   determinístico e local: nenhuma API ou IA gera esses textos. */
 export const TRAIT_COPY: Record<Trait, { label: string; phrase: string }> = {
   analysis: {
     label: "análise e lógica",

@@ -41,7 +41,7 @@ export default function SplitFeature({
           /* O selo é um PNG com transparência: object-contain preserva o recorte
              e o drop-shadow acompanha a silhueta (box-shadow desenharia um quadrado). */
           <Image
-            src="/images/mec.png"
+            src="/images/mec.webp"
             alt={`${badge.top} ${badge.big}`}
             width={109}
             height={109}

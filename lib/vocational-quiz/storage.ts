@@ -2,16 +2,9 @@ import { QUESTIONS, QUIZ_VERSION } from "./questions.ts";
 import { isQuizComplete, sanitizeAnswers } from "./scoring.ts";
 import type { QuizAnswers, QuizQuestion } from "./types.ts";
 
-/* Estado do teste com persistência no sessionStorage (um refresh acidental
-   não perde o progresso). Só guarda ids de pergunta/resposta — nenhum dado
-   pessoal. Funciona como store externo do useSyncExternalStore: o servidor
-   sempre renderiza a tela inicial e o cliente assume o estado salvo na
-   hidratação, sem setState dentro de efeito. */
 
 export const STORAGE_KEY = "la-vocational-quiz";
 
-/* A tela de abertura mora na home (QuizIntro); /teste-vocacional já começa
-   na primeira pergunta. */
 export type QuizStatus = "quiz" | "result";
 
 export type PersistedQuiz = {
@@ -28,8 +21,6 @@ export const INITIAL_QUIZ: PersistedQuiz = {
   answers: {},
 };
 
-/** Valida e normaliza o que veio do storage. Versão diferente, JSON inválido
- *  ou formato estranho = descarta (null). */
 export function parsePersistedQuiz(
   raw: string | null,
   questions: QuizQuestion[] = QUESTIONS,

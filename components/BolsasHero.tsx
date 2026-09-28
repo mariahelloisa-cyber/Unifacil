@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function BolsasHero() {
   return (
     <section className="relative isolate flex min-h-[420px] flex-col justify-center overflow-hidden bg-navy-950 lg:min-h-[520px]">
-      <Image src="/images/bolsas.png" alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
+      <Image src="/images/bolsas.webp" alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
       {/* Degradê em "U": escurece as laterais e a base (onde o texto e o
           botão ficam), deixa o meio de cima da foto livre. Duas camadas —
           uma horizontal (esquerda/direita) e uma vertical (de baixo pra

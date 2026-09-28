@@ -43,7 +43,7 @@ export default async function AdminLoginPage() {
 
         <div className="relative h-7 w-40 sm:h-8 sm:w-44">
           <Image
-            src="/images/logobranca-corte.png"
+            src="/images/logobranca-corte.webp"
             alt="Universidade Fácil"
             fill
             priority

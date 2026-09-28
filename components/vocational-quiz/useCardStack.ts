@@ -16,17 +16,6 @@ export const CARD_ANTERIOR = { scale: 0.82, rotateX: 28, rotateZ: 3, y: -30 };
 /** Distância mínima entre o header e o topo do card pinado. */
 const PIN_GAP = 24;
 
-/**
- * Pilha de cards com GSAP + ScrollTrigger (usada na home e no resultado).
- *
- * Estrutura esperada dentro de `sectionRef`:
- *   .quiz-stack-bg               → fundo pinado durante toda a sequência
- *   .quiz-stack-card             → wrapper pinado (pinSpacing: false), com perspective
- *     .quiz-stack-card__inner    → peça inteira que recebe scale/rotateX/rotateZ/y
- *
- * `center`: pina cada card centralizado na altura útil (abaixo do header) em
- * vez de colado no topo.
- */
 export function useCardStack(
   sectionRef: RefObject<HTMLElement | null>,
   { center = false, key }: { center?: boolean; key?: unknown } = {}

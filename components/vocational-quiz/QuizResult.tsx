@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import persona from "@/app/assets/persona.png";
+import persona from "@/app/assets/persona.webp";
 import { AreaIcon } from "@/components/AreaIcons";
 import { SITE } from "@/lib/constants";
 import { COURSE_AFFINITY_PROFILES } from "@/lib/vocational-quiz/courseAffinityProfiles";
@@ -13,7 +13,7 @@ import TraitIcon from "./TraitIcon";
 const capitalizar = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const hrefCurso = (r: RankedCourse) => `/${r.course.nivelSlug}/${r.course.slug}`;
 
-/** Símbolo oficial (logo-mark.png) como marca d'água. */
+/** Símbolo oficial (logo-mark.webp) como marca d'água. */
 function Watermark({ className = "" }: { className?: string }) {
   return (
     <span
@@ -21,7 +21,7 @@ function Watermark({ className = "" }: { className?: string }) {
       className={`pointer-events-none absolute aspect-[512/468] select-none overflow-hidden ${className}`}
     >
       <Image
-        src="/images/logo-mark.png"
+        src="/images/logo-mark.webp"
         alt=""
         width={512}
         height={468}
@@ -76,7 +76,7 @@ export default function QuizResult({
         {/* Topo: logo oficial + refazer */}
         <div data-stagger className="flex items-center justify-between gap-4">
           <Image
-            src="/images/logo-horizontal.png"
+            src="/images/logo-horizontal.webp"
             alt="Universidade Fácil"
             width={1200}
             height={416}
@@ -212,7 +212,7 @@ export default function QuizResult({
               <span className="mt-5 block h-px w-10 bg-white/70" />
             </div>
             <Image
-              src="/images/logobranca-corte.png"
+              src="/images/logobranca-corte.webp"
               alt=""
               width={1200}
               height={416}

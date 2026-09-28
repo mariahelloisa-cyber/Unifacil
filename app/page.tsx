@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import Container from "@/components/Container";
 import Hero from "@/components/Hero";
@@ -6,13 +5,12 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import PhotoRail from "@/components/PhotoRail";
 import IngressoCards from "@/components/IngressoCards";
-import SplitFeature from "@/components/SplitFeature";
+import PorQueUniFacil from "@/components/PorQueUniFacil";
 import FaqAccordion from "@/components/FaqAccordion";
-import QuizIntro from "@/components/vocational-quiz/QuizIntro";
+import QuizBottomBar from "@/components/vocational-quiz/QuizBottomBar";
 import { getAllCourses, getCourseNiveis, getFeaturedCourses } from "@/lib/data/courses";
 import { getSiteMediaUrl } from "@/lib/data/siteMedia";
 
-/* Respostas tiradas do briefing do programa ("O que somos" e "Como funciona"). */
 const faqs = [
   {
     pergunta: "O que é a Universidade Fácil?",
@@ -79,10 +77,10 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      {/* Faixa de foto única — matricula-hero.jpg é provisória, até chegar a foto definitiva. */}
+      {/* Faixa de foto única — matricula-hero.webp é provisória, até chegar a foto definitiva. */}
       <section className="relative aspect-[4/3] w-full overflow-hidden bg-navy-850 sm:aspect-[21/9]">
         <Image
-          src="/images/matricula-hero.jpg"
+          src="/images/matricula-hero.webp"
           alt=""
           fill
           sizes="100vw"
@@ -125,24 +123,12 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      {/* 3 — Split assimétrico full-bleed: por que a UniFácil */}
-      <SplitFeature
-        art="/images/sobre1.jpg"
-        eyebrow="Por que a UniFácil?"
-        title="Um programa para quem quer estudar e transformar a própria vida."
-        body="A Universidade Fácil adquire vagas antecipadamente em universidades e escolas técnicas de todo o Brasil. Assim, oferece bolsas de 100% para alunos de baixa renda e descontos de até 80% em cursos de instituições reconhecidas pelo MEC."
-        linkHref="/institucional"
-        linkLabel="Conheça o programa"
-        badge={{ top: "Instituições reconhecidas pelo", big: "MEC" }}
-        cards={[
-          { art: "/images/imagem1.jpg", label: "Bolsa de 100%" },
-          { art: "/images/imagem2.jpg", label: "Até 80% de desconto" },
-          { art: "/images/imagem3.jpg", label: "Centenas de cursos" },
-        ]}
-      />
+      {/* A faixa do teste vocacional fica fixa no rodapé da janela; aqui no
+          fluxo ela só marca o ponto em que aparece — o fim da seção acima. */}
+      <QuizBottomBar />
 
-      {/* 5 — Teste vocacional: só a chamada; as perguntas ficam em /teste-vocacional */}
-      <QuizIntro />
+      {/* 3 — Por que a UniFácil: faixa full-bleed com foto, CTA e selo do MEC */}
+      <PorQueUniFacil />
 
       {/* 7 — FAQ em duas colunas */}
       <section className="section-y bg-tint-deep">

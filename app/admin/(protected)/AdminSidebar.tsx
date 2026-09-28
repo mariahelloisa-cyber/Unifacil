@@ -34,7 +34,7 @@ export default function AdminSidebar({ email }: { email: string }) {
     <aside className="sticky top-0 flex h-screen w-64 shrink-0 flex-col self-start overflow-y-auto bg-navy-950 text-white">
       <div className="flex items-center gap-3 px-5 py-6">
         <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
-          <Image src="/images/logo-mark.png" alt="" width={44} height={44} className="h-7 w-7 object-contain" />
+          <Image src="/images/logo-mark.webp" alt="" width={44} height={44} className="h-7 w-7 object-contain" />
         </span>
         <span className="min-w-0">
           <span className="block truncate text-[15px] font-bold leading-tight">Universidade Fácil</span>

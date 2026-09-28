@@ -11,7 +11,7 @@ import Container from "./Container";
  *  personagem), cada um vindo de mais longe que o anterior. O
  *  conteúdo é o mesmo já usado no /[nivel] (nome/título/descrição da
  *  categoria) — só a composição visual mudou.
- *  Ativos fixos por pedido: matricula-hero.jpg no fundo, estudanteee-cutout.png
+ *  Ativos fixos por pedido: matricula-hero.webp no fundo, estudanteee-cutout.png
  *  na persona (estudanteee.avif enviado pelo usuário, com o fundo azul liso
  *  removido aqui — o recorte com transparência é o que este componente usa).
  *  A cascata usa a classe .rise do globals.css (mesma de IngressoCards/
@@ -67,7 +67,7 @@ export default function CategoryHero({
       ref={ref}
       className="relative isolate flex min-h-[440px] flex-col justify-center overflow-hidden bg-navy-950 lg:min-h-[500px]"
     >
-      <Image src="/images/matricula-hero.jpg" alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
+      <Image src="/images/matricula-hero.webp" alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
       {/* Tratamento da foto medido no Group-1.png da referência: um roxo
           profundo por cima de tudo (~#4B135E) e um brilho claro embaixo à
           esquerda. O brilho do alto à direita saiu — ficava atrás/por cima
@@ -133,7 +133,7 @@ export default function CategoryHero({
             style={{ "--rise": "100px", "--delay": "120ms" } as React.CSSProperties}
           >
             <Image
-              src="/images/estudantehero.png"
+              src="/images/estudantehero.webp"
               alt=""
               fill
               sizes="(max-width: 1024px) 70vw, 40vw"

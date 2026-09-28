@@ -1,7 +1,3 @@
-/* A duração do curso é texto livre no admin ("8 semestres", "4 anos",
-   "18 meses", "1 ano e 6 meses"). Para o filtro por duração, converte em
-   meses. Texto sem número reconhecível devolve null — esse curso não é
-   escondido pelo filtro. */
 
 const MESES_POR_UNIDADE: [RegExp, number][] = [
   [/^anos?$/, 12],
@@ -10,7 +6,7 @@ const MESES_POR_UNIDADE: [RegExp, number][] = [
   [/^bimestres?$/, 2],
   [/^m[eê]s(es)?$/, 1],
   [/^semanas?$/, 12 / 52],
-  [/^horas?$|^h$/, 0], // carga horária não diz a duração
+  [/^horas?$|^h$/, 0], 
 ];
 
 export function duracaoEmMeses(texto: string): number | null {
@@ -22,7 +18,7 @@ export function duracaoEmMeses(texto: string): number | null {
     const valor = Number(numero.replace(",", "."));
     const regra = unidade ? MESES_POR_UNIDADE.find(([re]) => re.test(unidade)) : undefined;
     if (regra && regra[1] === 0) continue;
-    // Número sem unidade conhecida: trata como meses.
+    
     total += valor * (regra ? regra[1] : 1);
     achou = true;
   }

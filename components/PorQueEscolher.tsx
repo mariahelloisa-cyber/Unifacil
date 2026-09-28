@@ -152,7 +152,7 @@ export default function PorQueEscolher() {
         <div className="relative z-[2] mt-6 flex justify-center sm:h-[380px] lg:absolute lg:inset-y-0 lg:left-[50%] lg:right-[16.5%] lg:mt-0 lg:block lg:h-auto lg:w-auto">
           <div className="relative h-[300px] w-[230px] sm:h-full sm:w-full lg:h-full lg:w-full">
             <Image
-              src="/images/pessoacard-transparente.png"
+              src="/images/pessoacard-transparente.webp"
               alt=""
               fill
               sizes="(max-width: 1024px) 60vw, 34vw"

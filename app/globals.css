@@ -288,6 +288,27 @@ body {
   }
 }
 
+/* ---- Faixa fixa do teste vocacional (QuizBottomBar) ----
+   Ela sobe quando o fim de "Educação acessível para todos" chega à janela.
+   --quiz-bar-h é medida pelo próprio componente; enquanto a faixa está no ar,
+   body[data-quiz-bar="on"] levanta o botão do WhatsApp e dá folga ao rodapé,
+   para nada ficar coberto. */
+.quiz-bar {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+body[data-quiz-bar="on"] {
+  --wa-lift: var(--quiz-bar-h, 96px);
+}
+/* A folga vai na última faixa do rodapé (e não no <footer>): ela é que tem
+   fundo, então o espaço extra continua escuro em vez de virar um vão branco. */
+body[data-quiz-bar="on"] footer > div:last-child {
+  padding-bottom: var(--quiz-bar-h, 96px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz-bar { transition: none; }
+}
+
 /* ---- Slider estilo "simulador" (faixas de valor) ----
    A parte percorrida é pintada pelo gradiente do próprio elemento: --fill
    vem inline, do valor atual, e os dois pseudo-elementos só desenham o

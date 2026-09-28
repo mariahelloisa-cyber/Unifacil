@@ -14,19 +14,19 @@ const useEfeitoAntesDaPintura = typeof window !== "undefined" ? useLayoutEffect 
    ajustam sozinhos ao número de passos. */
 const PASSOS: { titulo: string; texto: string }[] = [
   {
-    titulo: "Lorem ipsum dolor sit amet",
+    titulo: "Parcerias com instituições",
     texto:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
+      "Firmamos acordos com universidades e escolas técnicas de todo o Brasil e compramos antecipadamente um grande número de vagas.",
   },
   {
-    titulo: "quae ab illo inventore veritatis",
+    titulo: "Vagas gratuitas e com desconto",
     texto:
-      "aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem",
+      "Parte dessas vagas vira bolsa de 100% para alunos de baixa renda; as demais chegam até você com até 80% de desconto.",
   },
   {
-    titulo: "qui dolorem ipsum quia dolor sit amet",
+    titulo: "Você estuda e transforma sua vida",
     texto:
-      "magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit",
+      "Escolha entre centenas de cursos — profissionalizantes, EJA, técnicos, graduações e pós — em instituições reconhecidas pelo MEC.",
   },
 ];
 
@@ -134,7 +134,7 @@ export default function Trajetoria() {
         <div className="traj__head">
           <p className="traj__eyebrow">Como funciona</p>
           <h2 id="traj-titulo" className="traj__titulo">
-            Tragetória <span className="traj__marca text-gold">Universidade Fácil</span>
+            Trajetória <span className="traj__marca text-gold">Universidade Fácil</span>
           </h2>
         </div>
 

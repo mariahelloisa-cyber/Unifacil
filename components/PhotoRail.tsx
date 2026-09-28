@@ -7,10 +7,10 @@ import Image from "next/image";
 /* Fotos usadas enquanto o item não tem foto própria no admin — entram em
    sequência, na ordem dos cards. */
 const FOTOS_PADRAO = [
-  "/images/sobre1.jpg",
-  "/images/matricula-hero.jpg",
-  "/images/alunos.jpg",
-  "/images/estudantes.jpg",
+  "/images/sobre1.webp",
+  "/images/matricula-hero.webp",
+  "/images/alunos.webp",
+  "/images/estudantes.webp",
 ];
 
 export type PhotoRailItem = {

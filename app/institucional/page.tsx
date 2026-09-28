@@ -2,12 +2,18 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Container from "@/components/Container";
 import BlobDepoimentos from "@/components/BlobDepoimentos";
+import ContinuacaoBlob from "@/components/ContinuacaoBlob";
 import CourseBannerCta from "@/components/CourseBannerCta";
+import AtendimentoConsultores from "@/components/institucional/AtendimentoConsultores";
 import Oportunidades from "@/components/institucional/Oportunidades";
+import SobreNos from "@/components/institucional/SobreNos";
 import Trajetoria from "@/components/institucional/Trajetoria";
 import IntroAnimation from "@/components/intro/IntroAnimation";
 import Reveal from "@/components/Reveal";
 import ScrollLink from "@/components/ScrollLink";
+import TextoEmergindo from "@/components/TextoEmergindo";
+import institucionalHero from "@/app/assets/institucional.webp";
+import sobrenos from "@/app/assets/sobrenos.webp";
 import { SITE } from "@/lib/constants";
 import { getSiteMediaUrls, type SiteMediaKey } from "@/lib/data/siteMedia";
 
@@ -35,71 +41,90 @@ export default async function InstitucionalPage() {
           atrás desde o primeiro paint. */}
       <IntroAnimation />
 
-      {/* Hero centralizada sobre a fachada: título em amarelo oficial, duas
-          linhas de apoio e dois CTAs, com a forma orgânica escura ao fundo
-          dando profundidade (mesmo blob usado na seção "Acompanhe"). */}
-      <section className="relative isolate flex min-h-[560px] flex-col justify-center overflow-hidden bg-navy-950 lg:min-h-[660px]">
+      {/* Hero: o banner já traz logo, título e texto desenhados na arte, então
+          ele entra inteiro, na proporção original (sem object-cover, que
+          cortaria o texto da arte nas bordas), e por cima fica só o botão. */}
+      <section className="relative overflow-hidden bg-white">
+        {/* O título da arte é imagem: este h1 é o que leitores de tela e buscadores leem. */}
+        <h1 className="sr-only">Por que escolher a UniFácil? Mais oportunidades para transformar a sua história</h1>
+        {/* -mt-[2%] corta uma tira fina do topo da arte (margem em % é relativa
+            à largura, então o corte acompanha a escala do banner). */}
         <Image
-          src="/images/fachada.png"
-          alt=""
-          fill
+          src={institucionalHero}
+          alt="Por que escolher a UniFácil? Seu futuro começa com uma oportunidade. Mais oportunidades para transformar a sua história: bolsas de estudo para graduação e pós-graduação."
           priority
+          placeholder="blur"
           sizes="100vw"
-          className="-z-10 object-cover object-[center_40%]"
+          className="-mt-[2%] h-auto w-full"
         />
-        {/* Véu parelho: o texto agora é centralizado, então não cabe mais o
-            gradiente lateral que servia ao layout alinhado à esquerda. */}
-        <div className="absolute inset-0 -z-10 bg-navy-950/70" />
-        <div className="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-navy-950/85 to-transparent" />
 
-        {/* Os dois deslocamentos são o que posiciona a forma: X negativo
-            empurra para a esquerda, Y positivo desce. */}
-        <BlobDepoimentos fill="#1f0f2bd9" manterProporcao deslocamentoX={-380} deslocamentoY={240} />
-
-        <Container className="relative z-10 py-16 lg:py-24">
-          <Reveal>
-            <div className="mx-auto max-w-5xl text-center">
-              
-
-              <h1 className="font-display text-[clamp(2.5rem,5.8vw,5rem)] font-extrabold leading-[0.95] tracking-[-0.04em] text-gold">
-                Transformando vidas <br></br>com educação acessível 
-              </h1>
-
-              {/* O asterisco do título faz a chamada destas duas linhas. */}
-              <p className="mx-auto mt-8 max-w-xl text-[15px] font-semibold leading-relaxed text-white lg:text-base">
-                *Programa social de bolsas de estudo
-                <br />
-                Universidades e escolas técnicas de todo o Brasil
-              </p>
-
-              <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-                <ScrollLink
-                  alvo="nossa-historia"
-                  className="inline-flex items-center justify-center rounded-full bg-gold px-8 py-4 font-bold text-navy-950 transition-colors hover:bg-gold-hover"
-                >
-                  Conheça nossa história
-                </ScrollLink>
-              </div>
-            </div>
-          </Reveal>
-        </Container>
+        {/* A partir de md o botão fica sobre a arte, alinhado à coluna de texto
+            dela (11,9% da largura) e no respiro abaixo do parágrafo; no
+            mobile a arte fica pequena demais, então ele desce para baixo dela. */}
+        <div className="flex justify-center py-6 md:absolute md:left-[11.9%] md:top-[91%] md:block md:-translate-y-1/2 md:py-0">
+          <ScrollLink
+            alvo="nossa-historia"
+            className="inline-flex items-center justify-center rounded-full bg-accent px-8 py-4 font-bold text-white transition-colors hover:bg-accent-hover md:px-6 md:py-2.5 md:text-sm lg:px-8 lg:py-4 lg:text-base"
+          >
+            Conheça nossa história
+          </ScrollLink>
+        </div>
       </section>
 
       {/* Destino do botão "Conheça nossa história". */}
       <div id="nossa-historia" />
 
+      {/* Sobre nós: visão, missão e valores em três cards. */}
+      <SobreNos />
+
       {/* Banner + carrossel: o card em destaque sobrepõe a borda do banner. */}
       <Oportunidades />
+
+            
+
+      
 
       {/* Trajetória: a linha acende cada passo ao entrar na tela. */}
       <Trajetoria />
 
+      <AtendimentoConsultores />
 
+      {/* Frase de propósito, emergindo palavra a palavra a partir do centro
+          quando entra na tela. Mesmo fundo (tint) da seção "Acompanhe" logo
+          abaixo, para as duas lerem como um bloco só com a forma lilás
+          atravessando. À direita, a foto da estudante. */}
+      <section className="relative isolate overflow-hidden bg-tint pb-10 pt-16 lg:pb-12 lg:pt-20">
+        {/* A forma lilás da seção "Acompanhe" continua subindo por aqui, atrás
+            do texto. Só a partir de lg: no layout empilhado a rota das bordas
+            passaria por cima de tudo. */}
+        <ContinuacaoBlob blobPathId="blob-acompanhe" fill="#d9c9e6" className="hidden lg:block" />
+
+        <Container className="relative z-10 grid items-center gap-12 lg:grid-cols-2">
+          <TextoEmergindo
+            as="h2"
+            texto="Acreditamos que estudar não deveria depender do tamanho do bolso. Cada bolsa é uma porta aberta para um futuro com mais oportunidades."
+            destaque={{ texto: "uma porta aberta", className: "text-accent" }}
+            className="max-w-[20ch] font-display font-extrabold leading-[1.08] tracking-[-0.025em] text-navy-950"
+            style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+          />
+          {/* Foto apoiada na base da seção: a margem negativa anula o padding
+              de baixo para ela encostar na borda. */}
+          <div className="-mb-10 flex justify-center self-end lg:-mb-12 lg:justify-end">
+            <Image
+              src={sobrenos}
+              alt="Estudante sorrindo, abraçada a livros, em frente ao campus"
+              placeholder="blur"
+              sizes="(min-width: 1024px) 520px, 80vw"
+              className="h-auto w-full max-w-[380px] lg:max-w-[520px]"
+            />
+          </div>
+        </Container>
+      </section>
 
       {/* "Acompanhe" — prints das redes sociais, enviados pelo admin. */}
       {/* Sem margem no topo: encosta direto no fim da seção do vídeo. */}
-      <section className="relative overflow-hidden bg-tint py-14 lg:py-20">
-        <BlobDepoimentos fill="#d9c9e6" manterProporcao deslocamentoX={-60} />
+      <section className="relative overflow-hidden bg-tint pb-14 pt-10 lg:pb-20 lg:pt-12">
+        <BlobDepoimentos pathId="blob-acompanhe" fill="#d9c9e6" manterProporcao deslocamentoX={-60} />
 
         <Container className="relative z-10">
           <Reveal>

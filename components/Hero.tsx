@@ -42,7 +42,7 @@ export default function Hero({ videoUrl }: { videoUrl?: string }) {
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Link
-            href="/graduacao"
+            href="/tecnico?formacao=todas"
             className="group inline-flex h-14 items-center justify-between gap-5 rounded-full bg-accent pl-8 pr-3 text-base font-bold text-white transition-colors hover:bg-accent-hover sm:h-16"
           >
             Encontre seu curso
