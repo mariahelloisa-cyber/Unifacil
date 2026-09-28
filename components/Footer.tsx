@@ -32,7 +32,9 @@ export default function Footer() {
               alt="Universidade Fácil"
               width={1200}
               height={416}
-              className="h-10 w-auto"
+              /* self-start: na coluna do mobile o flex esticaria a logo até a
+                 largura toda, achatando a proporção. */
+              className="h-10 w-auto self-start sm:self-auto"
             />
             <div className="sm:border-l sm:border-white/20 sm:pl-10">
               <p className="text-[15px] font-bold">Central de Atendimento</p>

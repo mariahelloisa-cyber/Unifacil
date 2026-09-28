@@ -14,13 +14,13 @@ export default function ContatoHero() {
 
       <Container className="relative z-10 grid items-center gap-8 py-12 lg:grid-cols-[46%_1fr] lg:gap-4 lg:py-0">
         {/* Puxada para fora da margem do container: a aluna encosta na borda
-            esquerda da tela, como na referência. */}
-        <div className="relative h-[300px] lg:-ml-12 lg:h-[480px] xl:-ml-24">
+            esquerda da tela, como na referência. Some no mobile (abaixo de
+            sm); sem priority para o celular não baixar a imagem escondida. */}
+        <div className="relative hidden h-[300px] sm:block lg:-ml-12 lg:h-[480px] xl:-ml-24">
           <Image
             src={contato}
             alt=""
             fill
-            priority
             sizes="(max-width: 1024px) 100vw, 46vw"
             className="object-contain object-bottom lg:object-left-bottom"
           />

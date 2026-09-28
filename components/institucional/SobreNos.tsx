@@ -37,7 +37,7 @@ const CARDS: { titulo: string; topicos: string[] }[] = [
 
 export default function SobreNos() {
   return (
-    <section className="bg-white py-16 lg:py-20" aria-labelledby="sobre-nos-titulo">
+    <section className="bg-white pb-6 pt-2 sm:py-16 lg:py-20" aria-labelledby="sobre-nos-titulo">
       <Container>
         <Reveal className="mx-auto max-w-[1240px]">
           <p className="font-display text-[13px] font-bold uppercase tracking-[0.08em] text-navy-800">Sobre nós</p>
@@ -49,7 +49,7 @@ export default function SobreNos() {
           </h2>
         </Reveal>
 
-        <div className="mx-auto mt-10 grid max-w-[1240px] gap-3 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3">
+        <div className="mx-auto mt-6 grid max-w-[1240px] gap-3 sm:mt-10 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3">
           {CARDS.map((card, i) => (
             <Reveal key={card.titulo} delay={i * 80} className="h-full">
               <article className="flex h-full flex-col rounded-[15px] border-b-[10px] border-navy-850 bg-white p-[27px] shadow-[0_14px_36px_-20px_rgba(31,15,43,0.3)] ring-1 ring-navy-950/8 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_22px_48px_rgba(31,15,43,0.18)]">

@@ -126,7 +126,8 @@ export default function CategoryHero({
           negativa no desktop puxa a figura por cima do fim do texto, como na
           referência. overflow-hidden na seção é a rede de segurança contra
           qualquer sobra horizontal. Entra por último e de mais longe. */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-20">
+      {/* No mobile (abaixo de sm) a figura fica por cima do texto: some ali. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-20 hidden sm:block">
         <div className="container-x mx-auto flex h-full items-end justify-center lg:justify-end">
           <div
             className={`rise ${state} relative h-[320px] w-full max-w-[380px] sm:h-[380px] lg:h-[480px] lg:w-[40%] lg:max-w-[480px] lg:-ml-12 xl:h-[520px] xl:-ml-20`}

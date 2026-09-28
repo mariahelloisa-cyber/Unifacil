@@ -148,8 +148,9 @@ export default function PorQueEscolher() {
             Camada independente do card: absoluto em relação à SEÇÃO (via
             inset-0 do wrapper acima), não ao painel — por isso não é cortado
             pelo overflow-hidden do card e pode ultrapassá-lo livremente. No
-            mobile segue no fluxo normal, abaixo do painel. */}
-        <div className="relative z-[2] mt-6 flex justify-center sm:h-[380px] lg:absolute lg:inset-y-0 lg:left-[50%] lg:right-[16.5%] lg:mt-0 lg:block lg:h-auto lg:w-auto">
+            mobile (abaixo de sm) fica escondido; no tablet segue no fluxo
+            normal, abaixo do painel. */}
+        <div className="relative z-[2] mt-6 hidden justify-center sm:flex sm:h-[380px] lg:absolute lg:inset-y-0 lg:left-[50%] lg:right-[16.5%] lg:mt-0 lg:block lg:h-auto lg:w-auto">
           <div className="relative h-[300px] w-[230px] sm:h-full sm:w-full lg:h-full lg:w-full">
             <Image
               src="/images/pessoacard-transparente.webp"

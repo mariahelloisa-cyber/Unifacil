@@ -178,7 +178,17 @@ export default function Oportunidades() {
             </ul>
           </div>
 
+          {/* Seta, pontinhos e seta, centralizados. */}
           <div className="op__controles">
+            <button
+              type="button"
+              className="op__seta"
+              aria-label="Item anterior"
+              onClick={() => ir(-1)}
+            >
+              <Seta sentido="anterior" />
+            </button>
+
             <ul className="op__pontos">
               {CARDS.map((card, i) => (
                 <li key={card.titulo}>
@@ -193,24 +203,14 @@ export default function Oportunidades() {
               ))}
             </ul>
 
-            <div className="op__setas">
-              <button
-                type="button"
-                className="op__seta"
-                aria-label="Item anterior"
-                onClick={() => ir(-1)}
-              >
-                <Seta sentido="anterior" />
-              </button>
-              <button
-                type="button"
-                className="op__seta"
-                aria-label="Próximo item"
-                onClick={() => ir(1)}
-              >
-                <Seta sentido="proximo" />
-              </button>
-            </div>
+            <button
+              type="button"
+              className="op__seta"
+              aria-label="Próximo item"
+              onClick={() => ir(1)}
+            >
+              <Seta sentido="proximo" />
+            </button>
           </div>
         </div>
       </div>
