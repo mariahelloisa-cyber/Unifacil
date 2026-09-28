@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# Só valores públicos do Supabase (URL + chave anon), necessários no build da Cloudflare.
+!.env.production
 
 # vercel
 .vercel
