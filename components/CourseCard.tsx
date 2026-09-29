@@ -1,11 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Course } from "@/lib/data/courses";
+import { cargaHorariaEmHoras, formatarHoras } from "@/lib/cargaHoraria";
 
 export default function CourseCard({ course }: { course: Course }) {
+  /* O selo mostra a carga horária; curso sem ela cadastrada mostra a modalidade. */
+  const horas = cargaHorariaEmHoras(course.cargaHoraria);
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-[25px] bg-[#E9E9E9]">
-      {/* Área da foto — categoria/ícone no topo, nome + modalidade + link na base */}
+      {/* Área da foto — categoria/ícone no topo, nome + carga horária + link na base */}
       <div className="relative isolate flex h-[228px] flex-col p-[13px]">
         <Image
           // Curso sem capa cadastrada: mesma arte padrão da página do curso.
@@ -37,7 +40,7 @@ export default function CourseCard({ course }: { course: Course }) {
 
         <div className="mt-2.5 flex flex-wrap gap-1.5">
           <span className="flex h-[26px] items-center rounded-full bg-white px-2.5 text-[10px] font-semibold text-black">
-            {course.modalidade}
+            {horas ? `${formatarHoras(horas)} horas` : course.modalidade}
           </span>
         </div>
 

@@ -1,16 +1,24 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { Course } from "@/lib/data/courses";
-import { duracaoEmMeses } from "@/lib/duracao";
+import { cargaHorariaEmHoras, formatarHoras } from "@/lib/cargaHoraria";
 import CourseCard from "./CourseCard";
 import SearchInput from "./SearchInput";
 
 const ordenar = (a: string, b: string) => a.localeCompare(b, "pt-BR");
 
-/* Catálogo com filtros: barra lateral (duração, formação e área) à esquerda,
-   busca e grade de cards à direita. Sem preço no site, o filtro que seria de
-   mensalidade é por duração em meses. Nada marcado = mostra tudo. */
+const POR_PAGINA = 15;
+
+/* As cargas horárias costumam ser de 10 em 10 horas; o slider anda no mesmo passo. */
+const PASSO_HORAS = 10;
+
+const textoFaixa = ([de, ate]: [number, number]) =>
+  de === ate ? `${formatarHoras(de)} horas` : `${formatarHoras(de)} a ${formatarHoras(ate)} horas`;
+
+/* Catálogo com filtros: barra lateral (carga horária, formação e área) à
+   esquerda, busca e grade de cards à direita. Sem preço no site, o filtro que
+   seria de mensalidade é por carga horária. Nada marcado = mostra tudo. */
 export default function CourseFinder({
   courses,
   titulo = "Escolha o seu curso",
@@ -29,21 +37,32 @@ export default function CourseFinder({
     () => Array.from(new Set(courses.map((c) => c.area).filter(Boolean))).sort(ordenar),
     [courses]
   );
-  const meses = useMemo(() => new Map(courses.map((c) => [c, duracaoEmMeses(c.duracao)])), [courses]);
-  const limites = useMemo(() => {
-    const valores = [...meses.values()].filter((m): m is number => m !== null);
-    if (!valores.length) return null;
-    const min = Math.min(...valores);
-    const max = Math.max(...valores);
-    /* Todos com a mesma duração: abre uma folga para o slider continuar aparecendo. */
-    return min === max ? { min: Math.max(1, min - 6), max: max + 6 } : { min, max };
-  }, [meses]);
+  const horas = useMemo(() => new Map(courses.map((c) => [c, cargaHorariaEmHoras(c.cargaHoraria)])), [courses]);
 
   const [query, setQuery] = useState("");
   const [formacoesMarcadas, setFormacoes] = useState<string[]>(formacaoInicial ? [formacaoInicial] : []);
   const [areasMarcadas, setAreas] = useState<string[]>([]);
-  const [faixa, setFaixa] = useState<[number, number] | null>(null);
+  /* A faixa guarda os limites em que foi escolhida: se a formação ou a área
+     mudar os limites, ela deixa de valer e o slider volta a ocupar tudo. */
+  const [faixa, setFaixa] = useState<{ valor: [number, number]; limites: string } | null>(null);
   const [filtrosAbertos, setFiltrosAbertos] = useState(false);
+
+  /* Cursos da formação e da área marcadas: deles saem o mínimo e o máximo
+     de horas do slider. */
+  const base = useMemo(
+    () =>
+      courses.filter(
+        (c) =>
+          (!formacoesMarcadas.length || formacoesMarcadas.includes(c.nivelNome)) &&
+          (!areasMarcadas.length || areasMarcadas.includes(c.area))
+      ),
+    [courses, formacoesMarcadas, areasMarcadas]
+  );
+  const limites = useMemo(() => {
+    const valores = base.map((c) => horas.get(c)).filter((h): h is number => h != null);
+    return valores.length ? { min: Math.min(...valores), max: Math.max(...valores) } : null;
+  }, [base, horas]);
+  const chaveLimites = limites ? `${limites.min}-${limites.max}` : "";
 
   /* ?formacao=todas (botão "Encontre seu curso" da home) abre com todas as
      formações marcadas. Lido depois de montar para a página continuar estática. */
@@ -54,31 +73,36 @@ export default function CourseFinder({
     }
   }, [formacoes]);
 
-  /* A faixa escolhida vale só dentro dos limites atuais (cursos podem mudar). */
   const faixaAtual = useMemo<[number, number] | null>(
-    () =>
-      limites
-        ? [
-            Math.max(limites.min, Math.min(faixa?.[0] ?? limites.min, limites.max)),
-            Math.min(limites.max, Math.max(faixa?.[1] ?? limites.max, limites.min)),
-          ]
-        : null,
-    [limites, faixa]
+    () => (limites ? (faixa?.limites === chaveLimites ? faixa.valor : [limites.min, limites.max]) : null),
+    [limites, faixa, chaveLimites]
   );
-  const duracaoFiltrada =
+  const horasFiltradas =
     limites && faixaAtual && (faixaAtual[0] > limites.min || faixaAtual[1] < limites.max);
+  /* Passo de 10 horas quando o intervalo permite chegar exatamente ao máximo. */
+  const passo = limites && (limites.max - limites.min) % PASSO_HORAS === 0 ? PASSO_HORAS : 1;
 
   const lista = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return courses.filter((c) => {
-      if (formacoesMarcadas.length && !formacoesMarcadas.includes(c.nivelNome)) return false;
-      if (areasMarcadas.length && !areasMarcadas.includes(c.area)) return false;
-      const m = meses.get(c);
-      if (duracaoFiltrada && faixaAtual && m !== null && m !== undefined && (m < faixaAtual[0] || m > faixaAtual[1]))
-        return false;
+    return base.filter((c) => {
+      const h = horas.get(c);
+      if (horasFiltradas && faixaAtual && h != null && (h < faixaAtual[0] || h > faixaAtual[1])) return false;
       return !q || c.nome.toLowerCase().includes(q) || c.area.toLowerCase().includes(q);
     });
-  }, [courses, meses, query, formacoesMarcadas, areasMarcadas, duracaoFiltrada, faixaAtual]);
+  }, [base, horas, query, horasFiltradas, faixaAtual]);
+
+  /* 15 cursos por página. Como a faixa, a página guarda os filtros em que foi
+     aberta: mudou o filtro ou a busca, volta para a primeira. */
+  const chaveFiltros = [query, formacoesMarcadas.join("|"), areasMarcadas.join("|"), faixaAtual?.join("-")].join("#");
+  const [pagina, setPagina] = useState({ chave: "", numero: 1 });
+  const totalPaginas = Math.ceil(lista.length / POR_PAGINA);
+  const paginaAtual = pagina.chave === chaveFiltros ? Math.min(pagina.numero, totalPaginas) : 1;
+  const topoDaLista = useRef<HTMLDivElement>(null);
+
+  const irParaPagina = (numero: number) => {
+    setPagina({ chave: chaveFiltros, numero });
+    topoDaLista.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const alternar = (lista: string[], valor: string) =>
     lista.includes(valor) ? lista.filter((v) => v !== valor) : [...lista, valor];
@@ -91,8 +115,8 @@ export default function CourseFinder({
   };
 
   const chips = [
-    ...(duracaoFiltrada && faixaAtual
-      ? [{ chave: "duracao", label: `${faixaAtual[0]} a ${faixaAtual[1]} meses`, remover: () => setFaixa(null) }]
+    ...(horasFiltradas && faixaAtual
+      ? [{ chave: "horas", label: textoFaixa(faixaAtual), remover: () => setFaixa(null) }]
       : []),
     ...formacoesMarcadas.map((f) => ({
       chave: `f-${f}`,
@@ -162,18 +186,17 @@ export default function CourseFinder({
 
           <div className={`mt-4 border-t border-black/15 ${filtrosAbertos ? "block" : "hidden"} lg:block`}>
             {limites && faixaAtual && (
-              <SecaoFiltro titulo="Duração">
-                <p className="text-[13px] font-bold text-black">Em quantos meses?</p>
+              <SecaoFiltro titulo="Carga horária">
+                <p className="text-[13px] font-bold text-black">Quantas horas?</p>
                 <p className="mt-3 inline-flex h-[26px] items-center rounded-full bg-[#E9E9E9] px-3 text-[11px] font-bold text-black">
-                  {faixaAtual[0] === faixaAtual[1]
-                    ? `${faixaAtual[0]} meses`
-                    : `${faixaAtual[0]} a ${faixaAtual[1]} meses`}
+                  {textoFaixa(faixaAtual)}
                 </p>
                 <FaixaDupla
                   min={limites.min}
                   max={limites.max}
+                  passo={passo}
                   valor={faixaAtual}
-                  onChange={(v) => setFaixa(v)}
+                  onChange={(v) => setFaixa({ valor: v, limites: chaveLimites })}
                 />
               </SecaoFiltro>
             )}
@@ -213,7 +236,8 @@ export default function CourseFinder({
         </aside>
 
         {/* ---------- Busca + cursos ---------- */}
-        <div>
+        {/* Ao trocar de página a tela sobe até aqui, descontando o cabeçalho fixo. */}
+        <div ref={topoDaLista} className="scroll-mt-[122px] lg:scroll-mt-[130px]">
           <div className="flex justify-end">
             <SearchInput value={query} onChange={setQuery} placeholder="Procure o curso ideal para você!" compacta />
           </div>
@@ -223,11 +247,17 @@ export default function CourseFinder({
               Nenhum curso encontrado com esses filtros.
             </p>
           ) : (
-            <div className="mt-11 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {lista.map((course) => (
-                <CourseCard key={`${course.nivelSlug}-${course.slug}`} course={course} />
-              ))}
-            </div>
+            <>
+              <div className="mt-11 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {lista.slice((paginaAtual - 1) * POR_PAGINA, paginaAtual * POR_PAGINA).map((course) => (
+                  <CourseCard key={`${course.nivelSlug}-${course.slug}`} course={course} />
+                ))}
+              </div>
+
+              {totalPaginas > 1 && (
+                <Paginacao atual={paginaAtual} total={totalPaginas} onChange={irParaPagina} />
+              )}
+            </>
           )}
         </div>
       </div>
@@ -290,17 +320,62 @@ function Caixa({ label, marcada, onChange }: { label: string; marcada: boolean; 
   );
 }
 
+/* Números das páginas: sempre a primeira, a última e as vizinhas da atual;
+   o resto vira "…" para caber no celular. */
+function paginasVisiveis(atual: number, total: number): (number | "…")[] {
+  const numeros = [...new Set([1, atual - 1, atual, atual + 1, total])]
+    .filter((n) => n >= 1 && n <= total)
+    .sort((a, b) => a - b);
+  return numeros.flatMap((n, i) => (i > 0 && n - numeros[i - 1] > 1 ? ["…" as const, n] : [n]));
+}
+
+function Paginacao({ atual, total, onChange }: { atual: number; total: number; onChange: (n: number) => void }) {
+  const base =
+    "flex h-10 min-w-10 items-center justify-center rounded-full px-3 text-[14px] font-bold transition-[filter,opacity]";
+  const seta = `${base} bg-[#E9E9E9] text-black hover:brightness-95 disabled:pointer-events-none disabled:opacity-40`;
+  return (
+    <nav aria-label="Páginas de cursos" className="mt-10 flex flex-wrap items-center justify-center gap-2">
+      <button type="button" onClick={() => onChange(atual - 1)} disabled={atual === 1} aria-label="Página anterior" className={seta}>
+        ‹
+      </button>
+      {paginasVisiveis(atual, total).map((n, i) =>
+        n === "…" ? (
+          <span key={`reticencias-${i}`} aria-hidden className="px-1 text-[14px] font-bold text-black/50">
+            …
+          </span>
+        ) : (
+          <button
+            key={n}
+            type="button"
+            onClick={() => onChange(n)}
+            aria-current={n === atual ? "page" : undefined}
+            aria-label={`Página ${n}`}
+            className={`${base} ${n === atual ? "bg-gold text-navy-950" : "bg-[#E9E9E9] text-black hover:brightness-95"}`}
+          >
+            {n}
+          </button>
+        )
+      )}
+      <button type="button" onClick={() => onChange(atual + 1)} disabled={atual === total} aria-label="Próxima página" className={seta}>
+        ›
+      </button>
+    </nav>
+  );
+}
+
 /* Slider de duas pontas (mínimo e máximo): dois <input type="range">
    sobrepostos numa linha preta; as bolinhas são estilizadas em .faixa-range
    no globals.css. */
 function FaixaDupla({
   min,
   max,
+  passo,
   valor,
   onChange,
 }: {
   min: number;
   max: number;
+  passo: number;
   valor: [number, number];
   onChange: (v: [number, number]) => void;
 }) {
@@ -312,10 +387,10 @@ function FaixaDupla({
         type="range"
         min={min}
         max={max}
-        step={1}
+        step={passo}
         value={valor[0]}
         onChange={(e) => onChange([Math.min(Number(e.target.value), valor[1]), valor[1]])}
-        aria-label="Duração mínima em meses"
+        aria-label="Carga horária mínima em horas"
         className="faixa-range absolute inset-0 w-full"
         /* Encostada no fim, a bolinha do mínimo fica por cima — senão a do
            máximo a cobriria e ela não voltaria mais. */
@@ -325,10 +400,10 @@ function FaixaDupla({
         type="range"
         min={min}
         max={max}
-        step={1}
+        step={passo}
         value={valor[1]}
         onChange={(e) => onChange([valor[0], Math.max(Number(e.target.value), valor[0])])}
-        aria-label="Duração máxima em meses"
+        aria-label="Carga horária máxima em horas"
         className="faixa-range absolute inset-0 w-full"
       />
     </div>

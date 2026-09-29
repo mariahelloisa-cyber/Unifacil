@@ -49,7 +49,7 @@ export function cpfValido(valor: string) {
   return digito(9) === Number(cpf[9]) && digito(10) === Number(cpf[10]);
 }
 
-/** DDD + 8 ou 9 dígitos. */
+
 export const telefoneValido = (valor: string) => /^[1-9]{2}\d{8,9}$/.test(soDigitos(valor));
 
 export const emailValido = (valor: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valor.trim());
