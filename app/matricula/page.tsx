@@ -236,13 +236,19 @@ export default async function MatriculaPage() {
       {/* Faixa escura de CTA — atalho para quem já sabe o curso e quer se
           matricular direto, sem passar pela página do curso. */}
       <section className="relative overflow-hidden bg-navy-950">
-        <Image
-          src="/images/fachada.webp"
-          alt=""
+        {/* Fundo em vídeo: sobre.mp4 recomprimido para 1280px e sem áudio
+            (original em app/assets); o poster é um quadro dele, mostrado
+            enquanto o vídeo carrega. */}
+        <video
+          src="/videos/sobre.mp4"
+          poster="/images/sobre-poster.webp"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
           aria-hidden
-          fill
-          sizes="100vw"
-          className="object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <div aria-hidden className="absolute inset-0 bg-navy-950/80" />
         <Container className="relative py-16 text-center lg:py-20">

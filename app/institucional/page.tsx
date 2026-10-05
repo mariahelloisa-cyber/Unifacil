@@ -10,9 +10,8 @@ import SobreNos from "@/components/institucional/SobreNos";
 import Trajetoria from "@/components/institucional/Trajetoria";
 import IntroAnimation from "@/components/intro/IntroAnimation";
 import Reveal from "@/components/Reveal";
-import ScrollLink from "@/components/ScrollLink";
 import TextoEmergindo from "@/components/TextoEmergindo";
-import institucionalHero from "@/app/assets/institucional.webp";
+import institucionalHero from "@/app/assets/institucional.png";
 import sobrenos from "@/app/assets/sobrenos.webp";
 import { SITE } from "@/lib/constants";
 import { getSiteMediaUrls, type SiteMediaKey } from "@/lib/data/siteMedia";
@@ -43,36 +42,25 @@ export default async function InstitucionalPage() {
 
       {/* Hero: o banner já traz logo, título e texto desenhados na arte, então
           ele entra inteiro, na proporção original (sem object-cover, que
-          cortaria o texto da arte nas bordas), e por cima fica só o botão. */}
+          cortaria o texto da arte nas bordas). */}
       <section className="relative overflow-hidden bg-white">
         {/* O título da arte é imagem: este h1 é o que leitores de tela e buscadores leem. */}
         <h1 className="sr-only">Por que escolher a UniFácil? Mais oportunidades para transformar a sua história</h1>
-        {/* -mt-[2%] corta uma tira fina do topo da arte (margem em % é relativa
-            à largura, então o corte acompanha a escala do banner). */}
+        {/* -mt-[4%]/-mb-[2.5%] cortam tiras finas do topo e da base da arte
+            (margem em % é relativa à largura, então o corte acompanha a escala
+            do banner). */}
         <Image
           src={institucionalHero}
           alt="Por que escolher a UniFácil? Seu futuro começa com uma oportunidade. Mais oportunidades para transformar a sua história: bolsas de estudo para graduação e pós-graduação."
           priority
           placeholder="blur"
           sizes="100vw"
-          className="-mt-[2%] h-auto w-full"
+          className="-mb-[2.5%] -mt-[4%] block h-auto w-full"
         />
-
-        {/* A partir de md o botão fica sobre a arte, alinhado à coluna de texto
-            dela (11,9% da largura) e no respiro abaixo do parágrafo; no
-            mobile a arte fica pequena demais, então ele desce para baixo dela. */}
-        <div className="flex justify-center py-6 md:absolute md:left-[11.9%] md:top-[91%] md:block md:-translate-y-1/2 md:py-0">
-          <ScrollLink
-            alvo="nossa-historia"
-            className="inline-flex items-center justify-center rounded-full bg-accent px-8 py-4 font-bold text-white transition-colors hover:bg-accent-hover md:px-6 md:py-2.5 md:text-sm lg:px-8 lg:py-4 lg:text-base"
-          >
-            Conheça nossa história
-          </ScrollLink>
-        </div>
       </section>
 
-      {/* Destino do botão "Conheça nossa história". */}
-      <div id="nossa-historia" />
+      {/* Faixa divisória no fim do hero, igual à que fica logo abaixo do header. */}
+      <div aria-hidden className="h-[26px] bg-navy-800" />
 
       {/* Sobre nós: visão, missão e valores em três cards. */}
       <SobreNos />

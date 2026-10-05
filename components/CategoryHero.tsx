@@ -11,9 +11,8 @@ import Container from "./Container";
  *  personagem), cada um vindo de mais longe que o anterior. O
  *  conteúdo é o mesmo já usado no /[nivel] (nome/título/descrição da
  *  categoria) — só a composição visual mudou.
- *  Ativos fixos por pedido: matricula-hero.webp no fundo, estudanteee-cutout.png
- *  na persona (estudanteee.avif enviado pelo usuário, com o fundo azul liso
- *  removido aqui — o recorte com transparência é o que este componente usa).
+ *  Ativos fixos por pedido: fundocategorias.webp no fundo e personacapa.webp
+ *  (recorte com transparência) na persona — originais PNG em app/assets.
  *  A cascata usa a classe .rise do globals.css (mesma de IngressoCards/
  *  PhotoRail): um único observer libera .is-in e cada elemento sobe a
  *  distância (--rise) e no atraso (--delay) que definir — devagar (0.85s) e
@@ -67,19 +66,9 @@ export default function CategoryHero({
       ref={ref}
       className="relative isolate flex min-h-[440px] flex-col justify-center overflow-hidden bg-navy-950 lg:min-h-[500px]"
     >
-      <Image src="/images/matricula-hero.webp" alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
-      {/* Tratamento da foto medido no Group-1.png da referência: um roxo
-          profundo por cima de tudo (~#4B135E) e um brilho claro embaixo à
-          esquerda. O brilho do alto à direita saiu — ficava atrás/por cima
-          da persona, sem imagem para justificá-lo aqui. */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-[#4b135e]/[0.86]" />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10"
-        style={{
-          backgroundImage: "radial-gradient(ellipse 30% 40% at 16% 100%, rgb(255 255 255 / 0.48), transparent 70%)",
-        }}
-      />
+      {/* Fundo: fundocategorias.webp (arte pronta, já roxa com o bloco amarelo
+          atrás da persona) — sem tinta nem brilho por cima, senão apaga as cores. */}
+      <Image src="/images/fundocategorias.webp" alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
 
       <Container className="relative z-10 grid items-center gap-2 py-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-6 lg:py-20">
         {/* ---------- Texto + CTA ----------
@@ -134,7 +123,7 @@ export default function CategoryHero({
             style={{ "--rise": "100px", "--delay": "120ms" } as React.CSSProperties}
           >
             <Image
-              src="/images/estudantehero.webp"
+              src="/images/personacapa.webp"
               alt=""
               fill
               sizes="(max-width: 1024px) 70vw, 40vw"

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import "./oportunidades.css";
-import diferenciais from "@/app/assets/diferenciais.webp";
+import diferenciais from "@/app/assets/diferenciais.png";
 
 /* >>> Textos da seção — é só trocar por aqui. Os cards são os diferenciais do
    briefing (os dois PDFs), cada um apontando para a página que continua o
