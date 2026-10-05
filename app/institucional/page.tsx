@@ -8,7 +8,6 @@ import AtendimentoConsultores from "@/components/institucional/AtendimentoConsul
 import Oportunidades from "@/components/institucional/Oportunidades";
 import SobreNos from "@/components/institucional/SobreNos";
 import Trajetoria from "@/components/institucional/Trajetoria";
-import IntroAnimation from "@/components/intro/IntroAnimation";
 import Reveal from "@/components/Reveal";
 import TextoEmergindo from "@/components/TextoEmergindo";
 import institucionalHero from "@/app/assets/institucional.png";
@@ -35,11 +34,6 @@ export default async function InstitucionalPage() {
 
   return (
     <>
-      {/* Intro fullscreen de abertura: roda a sequência de frames por cima de
-          tudo e sobe revelando o hero, que é renderizado normalmente aqui
-          atrás desde o primeiro paint. */}
-      <IntroAnimation />
-
       {/* Hero: o banner já traz logo, título e texto desenhados na arte, então
           ele entra inteiro, na proporção original (sem object-cover, que
           cortaria o texto da arte nas bordas). */}
