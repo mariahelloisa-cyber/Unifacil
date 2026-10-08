@@ -131,31 +131,34 @@ export default function Trajetoria() {
   return (
     <section ref={raizRef} className="traj" aria-labelledby="traj-titulo">
       <Container>
-        <div className="traj__head">
-          <p className="traj__eyebrow">Como funciona</p>
-          <h2 id="traj-titulo" className="traj__titulo">
-            Trajetória <span className="traj__marca text-gold">Universidade Fácil</span>
-          </h2>
-        </div>
-
-        <div className="traj__trilho">
-          {/* Fica atrás dos passos e cobre toda a altura da lista. */}
-          <div className="traj__linha" aria-hidden>
-            <div className="traj__linha-fill" />
-            <div className="traj__ponta" />
+        {/* Painel de vidro fosco (glassmorphism) sobre o fundo roxo. */}
+        <div className="traj__vidro">
+          <div className="traj__head">
+            <p className="traj__eyebrow">Como funciona</p>
+            <h2 id="traj-titulo" className="traj__titulo">
+              Trajetória <span className="traj__marca text-gold">Universidade Fácil</span>
+            </h2>
           </div>
 
-          <ol className="traj__lista">
-            {PASSOS.map((passo, i) => (
-              <li key={passo.titulo} className={`traj__item traj__item--${i % 2 === 0 ? "esq" : "dir"}`}>
-                <div className="traj__texto">
-                  <h3 className="traj__item-titulo">{passo.titulo}</h3>
-                  <p className="traj__item-texto">{passo.texto}</p>
-                </div>
-                <span className="traj__ponto" aria-hidden />
-              </li>
-            ))}
-          </ol>
+          <div className="traj__trilho">
+            {/* Fica atrás dos passos e cobre toda a altura da lista. */}
+            <div className="traj__linha" aria-hidden>
+              <div className="traj__linha-fill" />
+              <div className="traj__ponta" />
+            </div>
+
+            <ol className="traj__lista">
+              {PASSOS.map((passo, i) => (
+                <li key={passo.titulo} className={`traj__item traj__item--${i % 2 === 0 ? "esq" : "dir"}`}>
+                  <div className="traj__texto">
+                    <h3 className="traj__item-titulo">{passo.titulo}</h3>
+                    <p className="traj__item-texto">{passo.texto}</p>
+                  </div>
+                  <span className="traj__ponto" aria-hidden />
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </Container>
     </section>
