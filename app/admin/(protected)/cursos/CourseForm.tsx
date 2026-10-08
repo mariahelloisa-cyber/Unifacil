@@ -139,13 +139,13 @@ export default function CourseForm({
 
         <div className="lg:col-span-2">
           <label htmlFor="descricao" className="text-sm font-semibold text-navy-950">
-            Modalidade
+            Sobre o curso
           </label>
           <textarea
             id="descricao"
             name="descricao"
             rows={3}
-            placeholder="O curso é ministrado 100% na modalidade EAD, ou seja, totalmente à Distância…"
+            placeholder="Em 24 meses, o curso prepara você para…"
             defaultValue={defaultValues?.descricao}
             className={inputClass}
           />

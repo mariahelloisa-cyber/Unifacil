@@ -9,8 +9,8 @@ import type { Course } from "@/lib/data/courses";
 /* Página "Saiba mais" do curso — réplica do layout da página de produto do
    site antigo (universidadefacil.com.br/produto/...): faixa em degradê com o
    nome e a duração, caixas de Duração/Carga horária, "Sobre o curso" e, à
-   direita, o card roxo que sobe por cima da faixa. Sem preço: onde havia
-   valor fica "Consulte". A grade curricular saiu, como pedido.
+   direita, o card branco de matrícula (topo roxo, benefícios em ícones) que
+   sobe por cima da faixa. Sem preço no site. A grade curricular saiu, como pedido.
    Cores medidas do CSS original (#5ABA0C no Matricule-se e o degradê azul do
    consultor); roxo e laranja são os oficiais da marca. */
 
@@ -65,7 +65,7 @@ export default function CourseDetail({ course }: { course: Course }) {
       </section>
 
       {/* ---------- Conteúdo + card ---------- */}
-      <section className="bg-white px-5 py-5 sm:px-[50px] sm:py-[50px] lg:px-0 lg:pb-[100px] lg:pt-5">
+      <section className="bg-white px-5 pb-0 pt-5 sm:px-[50px] sm:pt-[50px] lg:px-0 lg:pt-5">
         <div className="mx-auto flex w-full max-w-[1280px] flex-col lg:flex-row lg:items-start">
           {/* Coluna da esquerda */}
           <div className="flex flex-col gap-5 lg:w-[70%] lg:pr-[25px]">
@@ -81,10 +81,16 @@ export default function CourseDetail({ course }: { course: Course }) {
             <div className="rounded-[10px] border border-navy-800 bg-white p-5">
               <h2 className="text-[30px] font-extrabold uppercase leading-tight text-navy-800">Sobre o curso</h2>
               <div className="mt-5 space-y-4 text-[16px] leading-relaxed text-black">
-                {/* O texto de Modalidade vem do admin (coluna descricao); sem ele, só "EAD". */}
-                <p className="whitespace-pre-line">
-                  <strong>Modalidade</strong>: {course.descricao || course.modalidade}
-                </p>
+                {/* A descrição vem do admin (coluna descricao); sem ela, fica só a modalidade ("EAD"). */}
+                {course.descricao ? (
+                  <p className="whitespace-pre-line">
+                    <strong>Sobre o curso</strong>: {course.descricao}
+                  </p>
+                ) : (
+                  <p>
+                    <strong>Modalidade</strong>: {course.modalidade}
+                  </p>
+                )}
                 {course.inicio && (
                   <p>
                     <strong>Início do Curso</strong>: {course.inicio}
@@ -104,41 +110,72 @@ export default function CourseDetail({ course }: { course: Course }) {
             </div>
           </div>
 
-          {/* Card roxo — sobe 180px por cima da faixa no desktop e acompanha a rolagem. */}
-          <aside className="mt-[18px] w-full lg:sticky lg:top-[130px] lg:-mt-[180px] lg:w-[500px] lg:shrink-0">
-            <div className="flex flex-col gap-2.5 rounded-[10px] border-b-[10px] border-gold bg-navy-800 p-5 lg:p-[30px]">
-              <h1 className="text-center text-[30px] font-extrabold uppercase leading-tight text-white">
-                {course.nome}
-              </h1>
+          {/* Card de matrícula — sobe 180px por cima da faixa no desktop e acompanha a rolagem. */}
+          <aside className="mt-[18px] w-full lg:sticky lg:top-[130px] lg:-mt-[180px] lg:w-[440px] lg:shrink-0">
+            <div className="flex flex-col gap-3 rounded-[22px] border border-navy-950/5 bg-white p-3 shadow-[0_18px_45px_rgba(31,15,43,0.16)]">
+              {/* Topo roxo: categoria, nome e formas de pagamento. */}
+              <div className="relative overflow-hidden rounded-[16px] bg-navy-800 px-5 pb-5 pt-5">
+                <IconeFormatura className="pointer-events-none absolute right-4 top-1/2 h-[92px] w-[92px] -translate-y-1/2 text-white/15" />
+                <p className="relative text-[14px] font-extrabold uppercase tracking-wide text-gold">{course.nivelNome}</p>
+                <h1 className="relative mt-1 pr-20 text-[30px] font-extrabold leading-[1.1] text-white">
+                  {tituloDoCard(course)}
+                </h1>
+                <AbasPagamento />
+              </div>
 
-              <AbasPagamento cursoMatricula={cursoMatricula} />
+              <div className="rounded-[14px] bg-tint px-5 py-4">
+                <h2 className="text-[20px] font-extrabold leading-tight text-navy-800">
+                  Dê o próximo passo
+                  <br />
+                  no seu futuro!
+                </h2>
+                <p className="mt-1.5 text-[14px] leading-snug text-muted">{chamadaDoCurso(course)}</p>
+              </div>
+
+              <MatriculaButton
+                curso={cursoMatricula}
+                className="flex w-full items-center justify-center gap-2.5 rounded-[14px] bg-[#4BB33A] px-6 py-4 text-[16px] font-extrabold uppercase text-white transition-[filter] hover:brightness-95"
+              >
+                <IconeCapelo />
+                Matricule-se agora
+                <span aria-hidden>→</span>
+              </MatriculaButton>
 
               <a
                 href={SITE.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mb-2.5 flex w-full items-center justify-center gap-2.5 rounded-full px-[30px] py-[15px] text-[16px] font-bold text-white transition-[filter] hover:brightness-110"
-                style={{ backgroundImage: "linear-gradient(244deg, #00EEFF 0%, #1B75E8 100%)" }}
+                className="flex w-full items-center justify-center gap-2.5 rounded-[14px] border-2 border-navy-800 bg-white px-6 py-3.5 text-[15px] font-bold text-navy-800 transition-colors hover:bg-tint"
               >
                 <IconeWhatsapp />
-                Falar com consultor
+                Falar com um consultor
               </a>
 
-              <ul className="self-center rounded-[20px] bg-gold p-[30px]">
+              {/* Benefícios: os destaques do curso no admin; sem eles, os itens-padrão. */}
+              <ul
+                className="grid gap-2 rounded-[14px] bg-[#FDF3E1] px-2 py-4"
+                style={{ gridTemplateColumns: `repeat(${Math.min(itensDoCurso(course).length, 4)}, minmax(0, 1fr))` }}
+              >
                 {itensDoCurso(course).map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-[18px] font-bold text-navy-800">
-                    <svg width="21" height="21" viewBox="0 0 512 512" fill="currentColor" aria-hidden className="shrink-0">
-                      <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" />
-                    </svg>
-                    {item}
+                  <li key={item} className="flex flex-col items-center gap-1.5 text-center">
+                    <IconeBeneficio item={item} />
+                    <span className="text-[12px] font-bold leading-tight text-navy-950">{rotuloBeneficio(item)}</span>
                   </li>
                 ))}
               </ul>
 
-              <p className="rounded-[20px] border-b-[10px] border-gold bg-[#290736] p-5 text-center text-[18px] text-white">
-                A bolsa é mantida enquanto você acompanha o curso. Ela pode ser cancelada em caso de ausência por mais
-                de 30 dias consecutivos, reprovação em 3 disciplinas ou informações falsas no cadastro.
-              </p>
+              <div className="flex gap-3 rounded-[14px] bg-tint px-4 py-4">
+                <span className="mt-0.5 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-navy-800 text-[13px] font-extrabold text-white">
+                  i
+                </span>
+                <div>
+                  <p className="text-[14px] font-extrabold text-navy-800">Importante</p>
+                  <p className="mt-1 text-[13px] leading-snug text-muted">
+                    A bolsa é mantida enquanto você acompanha o curso. Ela pode ser cancelada em caso de ausência por
+                    mais de 30 dias consecutivos, reprovação em 3 disciplinas ou informações falsas no cadastro.
+                  </p>
+                </div>
+              </div>
             </div>
           </aside>
         </div>
@@ -149,39 +186,134 @@ export default function CourseDetail({ course }: { course: Course }) {
   );
 }
 
-/* Pix / Cartão / Boleto: abas em pílula como no original. Sem preço no site,
-   todas mostram "Consulte" e o Matricule-se. */
-function AbasPagamento({ cursoMatricula }: { cursoMatricula: { id: string; nome: string; nivel?: string } }) {
+/* Título do card sem o prefixo da categoria: "EJA – Ensino Fundamental" vira
+   "Ensino Fundamental", já que "EJA" aparece em dourado logo acima. */
+function tituloDoCard(course: Course) {
+  const prefixo = new RegExp(`^${course.nivelNome.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*[–—-]\\s*`, "i");
+  return course.nome.replace(prefixo, "");
+}
+
+/* Texto da caixa "Dê o próximo passo": no EJA fala em concluir a etapa. */
+function chamadaDoCurso(course: Course) {
+  if (ehEja(course)) {
+    return `Garanta sua vaga agora e conclua o ${tituloDoCard(course).toLowerCase()} com uma instituição reconhecida e de confiança.`;
+  }
+  return "Garanta sua vaga agora e comece seu curso com uma instituição reconhecida e de confiança.";
+}
+
+/* Pix / Cartão / Boleto em pílulas. Sem preço no site, servem só de
+   indicação das formas de pagamento aceitas. */
+function AbasPagamento() {
   const [ativa, setAtiva] = useState(0);
   return (
-    <div className="flex w-full flex-col gap-[13px]">
-      <div role="tablist" aria-label="Formas de pagamento" className="flex flex-wrap justify-center gap-y-2 sm:gap-x-[15px]">
-        {FORMAS_DE_PAGAMENTO.map((forma, i) => (
-          <button
-            key={forma}
-            type="button"
-            role="tab"
-            aria-selected={ativa === i}
-            onClick={() => setAtiva(i)}
-            className={`rounded-full border-2 border-white px-2.5 py-[5px] text-[14px] font-medium text-white transition-colors ${
-              ativa === i ? "bg-gold" : "bg-transparent hover:bg-[#2E1238]"
-            }`}
-          >
-            {forma}
-          </button>
-        ))}
-      </div>
-
-      <div role="tabpanel" className="flex flex-col gap-[13px]">
-        <p className="text-center text-[41px] font-extrabold leading-tight text-white">Consulte</p>
-        <MatriculaButton
-          curso={cursoMatricula}
-          className="flex w-full items-center justify-center rounded-full bg-[#5ABA0C] px-10 py-3.5 text-[15px] font-extrabold uppercase text-white transition-[filter] hover:brightness-95 lg:text-[21px]"
+    <div role="tablist" aria-label="Formas de pagamento" className="relative mt-4 flex flex-wrap gap-2">
+      {FORMAS_DE_PAGAMENTO.map((forma, i) => (
+        <button
+          key={forma}
+          type="button"
+          role="tab"
+          aria-selected={ativa === i}
+          onClick={() => setAtiva(i)}
+          className={`rounded-full border px-3.5 py-1.5 text-[13px] font-semibold transition-colors ${
+            ativa === i ? "border-gold bg-gold text-navy-950" : "border-white/80 bg-transparent text-white hover:bg-white/10"
+          }`}
         >
-          Matricule-se
-        </MatriculaButton>
-      </div>
+          {forma}
+        </button>
+      ))}
     </div>
+  );
+}
+
+/* Rótulo do benefício: o item "EAD" ganha a segunda linha "100% online". */
+function rotuloBeneficio(item: string) {
+  if (/^ead$/i.test(item.trim())) {
+    return (
+      <>
+        EAD
+        <br />
+        100% online
+      </>
+    );
+  }
+  return item;
+}
+
+/* Ícone de cada benefício, escolhido pelo texto do item. */
+function IconeBeneficio({ item }: { item: string }) {
+  const t = item.toLowerCase();
+  const props = {
+    width: 26,
+    height: 26,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 2,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+    className: "text-navy-800",
+  };
+
+  if (/taxa|desconto|%/.test(t)) {
+    return (
+      <svg {...props}>
+        <path d="M19 5 5 19" />
+        <circle cx="6.5" cy="6.5" r="2.5" />
+        <circle cx="17.5" cy="17.5" r="2.5" />
+      </svg>
+    );
+  }
+  if (/certificad|diploma/.test(t)) {
+    return (
+      <svg {...props}>
+        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+        <path d="M14 3v5h5M9 13h6M9 17h6" />
+      </svg>
+    );
+  }
+  if (/credenciad|autorizad|reconhecid|mec|seed/.test(t)) {
+    return (
+      <svg {...props}>
+        <path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z" />
+        <path d="m8.8 12 2.2 2.2 4.2-4.4" />
+      </svg>
+    );
+  }
+  if (/ead|online|distância/.test(t)) {
+    return (
+      <svg {...props}>
+        <rect x="4" y="5" width="16" height="11" rx="1.5" />
+        <path d="M2 19h20" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...props}>
+      <path d="m5 12.5 4.5 4.5L19 7.5" />
+    </svg>
+  );
+}
+
+function IconeCapelo() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M12 3 1 8.5 12 14l9-4.5V16h2V8.5z" />
+      <path d="M5.5 12.2V16c0 1.9 2.9 3.5 6.5 3.5s6.5-1.6 6.5-3.5v-3.8L12 15.5z" />
+    </svg>
+  );
+}
+
+/* Capelo sobre um livro aberto, decorativo no topo roxo do card. */
+function IconeFormatura({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinejoin="round" aria-hidden className={className}>
+      <path d="M32 6 10 16l22 10 22-10z" />
+      <path d="M19 20.5V28c0 3.3 5.8 6 13 6s13-2.7 13-6v-7.5" />
+      <path d="M54 16v11" />
+      <path d="M8 40c8-3 16-3 24 2 8-5 16-5 24-2v18c-8-3-16-3-24 2-8-5-16-5-24-2z" />
+      <path d="M32 42v18" />
+    </svg>
   );
 }
 

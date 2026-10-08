@@ -1,30 +1,17 @@
-import Image from "next/image";
 import Container from "./Container";
 import BlobDepoimentos from "./BlobDepoimentos";
-/* Composição da esquerda (aluna + janela de atendimento). Recorte feito a
-   partir de contato2.png, que veio em alta com o fundo azul embutido. */
-import contato from "@/app/assets/contato-recorte.webp";
 
-/** Hero da página de contato: azul, com a aluna à esquerda e a chamada à
- *  direita. Sem botão — o formulário e os canais vêm logo abaixo. */
+/** Hero da página de contato: roxo, com a chamada à direita. Sem botão — o
+ *  formulário e os canais vêm logo abaixo. */
 export default function ContatoHero() {
   return (
     <section className="relative isolate overflow-hidden bg-navy-950">
       <BlobDepoimentos fill="#6a4287" manterProporcao />
 
       <Container className="relative z-10 grid items-center gap-8 py-12 lg:grid-cols-[46%_1fr] lg:gap-4 lg:py-0">
-        {/* Puxada para fora da margem do container: a aluna encosta na borda
-            esquerda da tela, como na referência. Some no mobile (abaixo de
-            sm); sem priority para o celular não baixar a imagem escondida. */}
-        <div className="relative hidden h-[300px] sm:block lg:-ml-12 lg:h-[480px] xl:-ml-24">
-          <Image
-            src={contato}
-            alt=""
-            fill
-            sizes="(max-width: 1024px) 100vw, 46vw"
-            className="object-contain object-bottom lg:object-left-bottom"
-          />
-        </div>
+        {/* Coluna da esquerda vazia (era a foto): segura a chamada no lugar
+            dela à direita e a altura da faixa no desktop. */}
+        <div aria-hidden className="hidden lg:block lg:h-[480px]" />
 
         <div className="lg:py-16">
           <span className="text-[13px] font-bold uppercase tracking-[0.22em] text-gold">
