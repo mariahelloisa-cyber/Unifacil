@@ -8,7 +8,7 @@ import IngressoCards from "@/components/IngressoCards";
 import PorQueUniFacil from "@/components/PorQueUniFacil";
 import FaqAccordion from "@/components/FaqAccordion";
 import QuizBottomBar from "@/components/vocational-quiz/QuizBottomBar";
-import { getAllCourses, getCourseNiveis, getFeaturedCourses } from "@/lib/data/courses";
+import { CAPAS_NIVEL, getAllCourses, getCourseNiveis, getFeaturedCourses } from "@/lib/data/courses";
 import { getSiteMediaUrl } from "@/lib/data/siteMedia";
 
 const faqs = [
@@ -70,7 +70,7 @@ export default async function HomePage() {
                 key: c.slug,
                 href: `/${c.slug}`,
                 nome: c.nome,
-                imagemUrl: c.imagemUrl,
+                imagemUrl: c.imagemUrl || CAPAS_NIVEL[c.slug] || "",
               }))}
             />
           </Reveal>

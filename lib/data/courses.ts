@@ -65,6 +65,15 @@ export type CourseNivel = {
   destaqueHome: boolean;
 };
 
+/* Capa do card em "Escolha por categoria" quando o nível não tem imagem
+   própria no admin (a imagem do admin, se houver, tem prioridade). */
+export const CAPAS_NIVEL: Record<string, string> = {
+  bacharelado: "/images/bacharelado.webp",
+  tecnologos: "/images/tecnologo.webp",
+  "superior-sequencial": "/images/sequencial.webp",
+  "pos-graduacao": "/images/posgraduacao.webp",
+};
+
 type CourseRow = {
   id: string;
   slug: string;

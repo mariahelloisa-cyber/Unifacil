@@ -11,7 +11,7 @@ import Reveal from "@/components/Reveal";
 import TrustBadges from "@/components/TrustBadges";
 import MatriculaButton from "@/components/MatriculaButton";
 import { SITE } from "@/lib/constants";
-import { getAllCourses, getCourseNiveis } from "@/lib/data/courses";
+import { CAPAS_NIVEL, getAllCourses, getCourseNiveis } from "@/lib/data/courses";
 
 export const metadata: Metadata = {
   title: "Matrícula",
@@ -226,7 +226,7 @@ export default async function MatriculaPage() {
                   key: n.slug,
                   href: `/${n.slug}`,
                   nome: n.nome,
-                  imagemUrl: n.imagemUrl,
+                  imagemUrl: n.imagemUrl || CAPAS_NIVEL[n.slug] || "",
                 }))}
             />
           </Reveal>
